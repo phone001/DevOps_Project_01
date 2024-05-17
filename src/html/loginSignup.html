@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <link rel="stylesheet" href="../resource/css/loginSignup.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <div id="headder">
+            <div>
+                <img src="../resource/img/logo.gif" alt="로고이미지">
+            </div>
+        </div>
+        <div id="content">
+            <div class="content-wrap">
+                <!-- 환영합니다 레이아웃 -->
+                <div class="text-wrap">
+                    <div class="text-flex">
+                        <!-- 왼쪽 -->
+                        <div class="text-content text-con1">
+                            <div class="text-logo">
+                                <img src="../resource/img/logo.gif" alt="로고 이미지">
+                            </div>
+                            <div class="text-info">
+                                <span class="text-title">신라리워즈에 오신것을 환영합니다.</span>
+                                <br>
+                                <span class="text-sub">아직 신라리워즈 회원이 아니신가요?</span>
+                            </div>
+                            <div class="btn-wrap">
+                                <button class="event-btn" id="changeSignupBtn">신라리워즈 가입</button>
+                            </div>
+                        </div>
+
+                        <!-- 오른쪽 -->
+                        <div class="text-content text-con2">
+                            <div class="text-logo">
+                                <img src="../resource/img/logo.gif" alt="로고 이미지">
+                            </div>
+                            <div class="text-info">
+                                <span class="text-title">신라리워즈에 오신것을 환영합니다.</span>
+                                <br>
+                                <span class="text-sub">이미 신라리워즈 회원이신가요?</span>
+                            </div>
+                            <div class="btn-wrap">
+                                <button class="event-btn" id="changeLoginBtn">로그인</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 가입 및 로그인 레이아웃 -->
+                <div class="form-wrap">
+                    <div class="text-flex">
+                        <!-- 오른쪽 -->
+                        <div class="form-content form-con01">
+                            <div class="form-logo">
+                                <span>로그인</span>
+                            </div>
+                            <div class="form-input">
+                                <input class="input-layouts" type="text" id="signinId" placeholder="신라리워즈 아이디 입력">
+                                <input class="input-layouts" type="password" id="signinPw" placeholder="비밀번호">
+                            </div>
+                            <div class="btn-wrap">
+                                <button class="event-btn" id="loginBtn">로그인</button>
+                            </div>
+
+                        </div>
+                        <!-- 왼쪽 -->
+                        <div class="form-content form-con02">
+                            <div class="form-logo">
+                                <span>회원가입</span>
+                            </div>
+                            <div class="form-input">
+                                <input class="input-layouts" type="text" id="signupId" placeholder="사용하실 아이디 입력">
+                                <input class="input-layouts" type="password" id="signupPw" placeholder="사용하실 비밀번호">
+                                <input class="input-layouts" type="password" id="signupPwChk" placeholder="비밀번호 확인">
+                                <input class="input-layouts" type="text" id="signupNickname" placeholder="사용하실 닉네임 입력">
+                            </div>
+                            <div class="btn-wrap">
+                                <button class="event-btn" id="signupBtn">회원가입</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="footer">
+
+            </div>
+        </div>
+</body>
+
+<script src="../js/userClass.js"></script>
+<script src="../js/userManagerClass.js"></script>
+<script src="../js/loginSignup.js"></script>
+
+</html>
