@@ -1,1 +1,63 @@
-test
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객문의</title>
+    <link rel="stylesheet" href="../resource/css/boardList.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <!-- 헤더 -->
+        <div id="headder">
+            <div>
+                <img src="../resource/img/logo.gif" alt="로고이미지">
+            </div>
+            <!-- 로그인 시 innerHTML로 제어해야함 -->
+            <div id="redirectBtn">
+                <a href="../html/loginSignup.html">로그인</a>
+            </div>
+        </div>
+
+        <div id="container">
+            <div class="title-font">고객문의</div>
+            <div class="search-wrap">
+                <select name="" id="searchTarget">
+                    <option value="title" selected>제목</option>
+                    <option value="userNickname">작성자</option>
+                </select>
+                <input type="text" id="searchValue">
+                <button id="searchBtn">검색</button>
+            </div>
+            <div class="content-wrap">
+                <div class="top content-layouts">
+                    <div class="content-num">번호</div>
+                    <div class="content-title">제목</div>
+                    <div class="content-auther">작성자</div>
+                    <div class="content-date">등록일</div>
+                </div>
+
+                <!-- rend 영역 -->
+                <div>
+                    <div class="content-layouts">
+                        <div class="content-num">1</div>
+                        <div class="content-title">임시</div>
+                        <div class="content-auther">등록</div>
+                        <div class="content-date">게시글</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>페이지네이션이 들어갈 곳</div>
+
+            <div>
+                <button>문의하기</button>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
