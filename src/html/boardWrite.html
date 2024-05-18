@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../resource/css/boardWrite.css">
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script> -->
+    <script src="../resource/lib/ckeditor5/build/ckeditor.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <div class="header">
+            <div>
+                <img src="../resource/img/logo.gif">
+            </div>
+            <div>
+                <a href="">로그인</a>
+            </div>
+        </div>
+        <div class="content">
+            <div>
+                <h2>문의하기</h2>
+            </div>
+            <div>
+                <form id="form">
+                    <div>
+                        <div>
+                            <label for="title">제목</label>
+                        </div>
+                        <div>
+                            <input type="text" id="title" placeholder="제목을 입력해주세요">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="content">문의내용</label>
+                        </div>
+                        <div>
+                            <textarea id="content" name="content"></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <button>문의하기</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div class="footer">
+            <div>
+                <img src="../resource/img/footerlogo.gif">
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <img src="../resource/img/mono.png">
+                    </div>
+                    <div>
+                        <img src="../resource/img/stay.png">
+                    </div>
+                    <div>
+                        <img src="../resource/img/shilla.png">
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <img src="../resource/img/tel.gif" alt="">
+                    </div>
+                    <div>
+                        <img src="../resource/img/intro.png" alt="">
+                    </div>
+                    <div>
+                        <img src="../resource/img/sns.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../js/boardClass.js"></script>
+<script src="../js/boardManagerClass.js"></script>
+<!-- <script src="../js/boardWrite.js"></script> -->
+<script>
+
+    let editor = null;
+    const _form = document.querySelector("#form");
+    async function main() {
+        editor = await ClassicEditor.create(document.querySelector("#content"));
+
+    }
+
+    main();
+    _form.onsubmit = (e) => {
+        e.preventDefault();
+        console.log("test")
+        console.log(editor.getData().trim());
+        const board = new Board("test", "김기현", editor.getData());
+        const list = new BoardManager();
+
+        list.addBoard(board);
+    }
+
+</script>
+
+
+</html>

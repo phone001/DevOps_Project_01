@@ -1,0 +1,126 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #EFE3C8;
+}
+
+.header>div:nth-child(2) {
+    position: absolute;
+    right: 50px;
+}
+
+.header>div:nth-child(2)>a {
+    text-decoration: none;
+    color: black;
+}
+
+
+.content {
+    width: 100%;
+    min-height: calc(100vh - 243px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content>div {
+    width: 800px;
+    padding: 20px;
+}
+
+
+.content>div:nth-child(1) {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.content>div:nth-child(1)>div {
+    display: flex;
+    justify-content: center;
+}
+
+#form {
+    width: 100%;
+    padding: 10px;
+}
+
+
+#form>div:nth-child(2)>div {
+    margin: 10px 0;
+}
+
+input {
+    width: 100%;
+    padding: 3px 6px;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: 100%;
+    box-sizing: border-box;
+}
+
+textarea {
+    width: 100%;
+    height: 300px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 6px;
+    background-color: #EFE3C8;
+    font-size: 100%;
+}
+
+.footer {
+    width: 100%;
+    margin: 0;
+    background-color: #F1EBD6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer>div:nth-child(2)>div:nth-child(1) {
+    display: flex;
+
+}
+
+.footer>div:nth-child(2)>div:nth-child(1)>div {
+    margin: 0 20px;
+}
+
+.footer>div:nth-child(2)>div:nth-child(2) {
+    width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e3dec9;
+    margin: 10px 0;
+    padding: 10px 0;
+}
+
+/* ckeditor 스타일 */
+.ck {
+    height: 300px;
+}
