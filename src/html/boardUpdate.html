@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../resource/css/boardUpdate.css">
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script> -->
+    <script src="../resource/lib/ckeditor5/build/ckeditor.js"></script>
+    <script src="../js/boardClass.js"></script>
+    <script src="../js/boardManagerClass.js"></script>
+
+    <script>
+        window.onload = async function () {
+            window.editor = await ClassicEditor.create(document.querySelector("#content"));
+            const list = new BoardManager();
+            const boardIndex = new URLSearchParams().get("index") || 0;
+            const board = list.getBoardList()[boardIndex];
+            title.value = board.getTitle();
+            editor.setData(board.getContent())
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <div class="header">
+            <div>
+                <img src="../resource/img/logo.gif">
+            </div>
+            <div>
+                <a href="">로그인</a>
+            </div>
+        </div>
+        <div class="content">
+            <div>
+                <h2>문의 수정</h2>
+            </div>
+            <div>
+                <form id="form">
+                    <div>
+                        <div>
+                            <label for="title">제목</label>
+                        </div>
+                        <div>
+                            <input type="text" id="title">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="content">상세내용</label>
+                        </div>
+                        <div>
+                            <textarea id="content" name="content"></textarea>
+                        </div>
+                    </div>
+                    <div class="btn-box">
+                        <button>수정완료</button>
+                        <button type="button" id="back">뒤로가기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="footer">
+            <div>
+                <img src="../resource/img/footerlogo.gif">
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <img src="../resource/img/mono.png">
+                    </div>
+                    <div>
+                        <img src="../resource/img/stay.png">
+                    </div>
+                    <div>
+                        <img src="../resource/img/shilla.png">
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <img src="../resource/img/tel.gif" alt="">
+                    </div>
+                    <div>
+                        <img src="../resource/img/intro.png" alt="">
+                    </div>
+                    <div>
+                        <img src="../resource/img/sns.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    function getEditor() {
+        return editor
+    }
+    const _form = document.querySelector("#form");
+
+    function submitHandler() {
+        let nickname = sessionStorage.getItem("currentuser");
+        const boardIndex = 0;
+
+        const title = document.querySelector("#title").value;
+        const content = editor.getData();
+
+        if (!emptyCheck(title) && !emptyCheck(content)) {
+            const boardList = new BoardManager();
+            boardList.updateBoard(boardIndex, title, content);
+        }
+
+    }
+    _form.onsubmit = function (e) {
+        e.preventDefault();
+        submitHandler()
+    }
+</script>
+
+</html>
