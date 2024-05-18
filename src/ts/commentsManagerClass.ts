@@ -16,16 +16,11 @@ class CommentsManager {
                 this[value] = JSON.parse(localStorage.getItem(value)).map((e) => { return new Reply(e.comments, e.name, e.boardIndex, e.commentIndex, e.date) });;
             }
         }
+
     }
 
-    getCommentsList(boardIndex: number): Comments[] {
-        const arr: Comments[] = [];
-        for (let comments of this.commentsList) {
-            if (comments.getBoardIndex() === boardIndex) {
-                arr.push(comments);
-            }
-        }
-        return arr;
+    getCommentsList(): Comments[] {
+        return this.commentsList;
     }
 
     getReplyList(boardIndex: number): Reply[] {
@@ -47,11 +42,11 @@ class CommentsManager {
     }
 
     setCommentsList() {
-        localStorage.setItem("commnetsList", JSON.stringify(this.commentsList))
+        localStorage.setItem("commentsList", JSON.stringify(this.commentsList))
     }
 
     setReplyList() {
-        localStorage.setItem("replyList", JSON.stringify(this.commentsList))
+        localStorage.setItem("replyList", JSON.stringify(this.replyList))
     }
 
     updateComments(index: number, comments: string) {

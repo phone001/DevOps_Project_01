@@ -1,10 +1,10 @@
 class Comments {
-    private commnets: string;
+    private comments: string;
     private date: Date;
     private name: string;
     private boardIndex: number;
     constructor(comments: string, name: string, boardIndex: number, date: Date = new Date()) {
-        this.commnets = comments;
+        this.comments = comments;
         this.name = name;
         this.date = date;
         this.boardIndex = boardIndex;
@@ -12,7 +12,7 @@ class Comments {
 
     //getter
     getComments(): string {
-        return this.commnets;
+        return this.comments;
     }
     getName(): string {
         return this.name;
@@ -30,7 +30,7 @@ class Comments {
 
     //setter
     setComments(comments: string): void {
-        this.commnets = comments;
+        this.comments = comments;
     }
     setName(name: string): void {
         this.name = name;
