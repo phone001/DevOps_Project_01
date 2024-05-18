@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../resource/css/boardDetail.css">
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script> -->
+    <script src="../resource/lib/ckeditor5/build/ckeditor.js"></script>
+    <script src="../js/boardClass.js"></script>
+    <script src="../js/boardManagerClass.js"></script>
+    <script src="../js/commentsClass.js"></script>
+    <script src="../js/commentsManagerClass.js"></script>
+    <script src="../js/commentsReplyClass.js"></script>
+
+    <script>
+        window.onload = async function () {
+            let editor = await ClassicEditor.create(document.querySelector("#content"));
+            editor.enableReadOnlyMode('content');
+            const boardIndex = new URLSearchParams().get("index") || 0;
+            const list = new BoardManager();
+            const board = list.getBoardList()[boardIndex];
+            title.value = board.getTitle();
+            editor.setData(board.getContent())
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <div class="header">
+            <div>
+                <img src="../resource/img/logo.gif">
+            </div>
+            <div>
+                <a href="">로그인</a>
+            </div>
+        </div>
+        <div class="content">
+            <div>
+                <div>
+                    <h2>문의 상세내용</h2>
+                </div>
+                <div>
+                    <form id="form">
+                        <div>
+                            <div>
+                                <label for="title">제목</label>
+                            </div>
+                            <div>
+                                <input type="text" id="title" readonly>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <label for="content">상세내용</label>
+                            </div>
+                            <div>
+                                <textarea id="content" name="content"></textarea>
+                            </div>
+                        </div>
+                        <div class="btn-box">
+                            <button>수정</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="comment-box">
+                    <h4>댓글</h4>
+                    <form id="comment-form">
+                        <textarea type="text" id="comment"></textarea>
+                        <button>댓글작성</button>
+                    </form>
+                    <div id="comment_view">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div>
+                <img src="../resource/img/footerlogo.gif">
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <img src="../resource/img/mono.png">
+                    </div>
+                    <div>
+                        <img src="../resource/img/stay.png">
+                    </div>
+                    <div>
+                        <img src="../resource/img/shilla.png">
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <img src="../resource/img/tel.gif" alt="">
+                    </div>
+                    <div>
+                        <img src="../resource/img/intro.png" alt="">
+                    </div>
+                    <div>
+                        <img src="../resource/img/sns.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
