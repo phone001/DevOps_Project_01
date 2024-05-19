@@ -1,20 +1,20 @@
 class Reply {
-    private commnets: string;
+    private comments: string;
     private date: Date;
     private name: string;
     private boardIndex: number;
-    private commnetIndex?: number;
-    constructor(comments: string, name: string, boardIndex: number, commnetIndex: number, date: Date = new Date()) {
-        this.commnets = comments;
+    private commentIndex: number;
+    constructor(comments: string, name: string, boardIndex: number, commentIndex: number, date: Date = new Date()) {
+        this.comments = comments;
         this.name = name;
         this.date = date;
         this.boardIndex = boardIndex;
-        this.commnetIndex = commnetIndex;
+        this.commentIndex = commentIndex;
     }
 
     //getter
     getAddComment(): string {
-        return this.commnets;
+        return this.comments;
     }
     getDate(): string {
         const _date: Date = new Date(this.date);
@@ -31,12 +31,12 @@ class Reply {
     }
 
     getCommentIndex(): number {
-        return this.commnetIndex;
+        return this.commentIndex;
     }
 
     //setter
     setAddComment(comments: string): void {
-        this.commnets = comments;
+        this.comments = comments;
     }
     setName(name: string): void {
         this.name = name;
@@ -45,7 +45,7 @@ class Reply {
         this.boardIndex = boardIndex;
     }
     setCommnetIndex(commnetIndex: number): void {
-        this.commnetIndex = commnetIndex;
+        this.commentIndex = commnetIndex;
     }
     updateReply(comments: string) {
         this.setAddComment(comments);

@@ -23,14 +23,8 @@ class CommentsManager {
         return this.commentsList;
     }
 
-    getReplyList(boardIndex: number): Reply[] {
-        const arr: Reply[] = [];
-        for (let reply of this.replyList) {
-            if (reply.getBoardIndex() === boardIndex) {
-                arr.push(reply);
-            }
-        }
-        return arr;
+    getReplyList(): Reply[] {
+        return this.replyList;
     }
 
     addComments(comments: Comments) {
@@ -53,8 +47,24 @@ class CommentsManager {
         this.commentsList[index].updateComment(comments);
         this.setCommentsList();
     }
+
     updateReply(index: number, comments: string) {
         this.replyList[index].updateReply(comments);
+        this.setReplyList();
+    }
+    deleteComments(index: number, boardIndex: number) {
+        this.commentsList.splice(index, 1);
+        for (let i = 0; i < this.replyList.length; i++) {
+            if (this.replyList[i].getCommentIndex() === index && this.replyList[i].getBoardIndex() === boardIndex) {
+                this.replyList.splice(i, 1);
+            }
+        }
+
+        this.setCommentsList();
+        this.setReplyList();
+    }
+    deleteReply(index: number) {
+        this.replyList.splice(index, 1);
         this.setReplyList();
     }
 }
