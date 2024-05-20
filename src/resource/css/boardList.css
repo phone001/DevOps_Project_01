@@ -30,7 +30,7 @@ a {
 }
 
 .redirectBtn.state-user {
-    /* background-color: #432C10; */
+    background-color: #432C10;
 }
 
 #container {
@@ -172,6 +172,8 @@ a {
     justify-content: center;
     margin-top: 12px;
     font-weight: bold;
+    /* 푸터 추가시 수정 */
+    margin-bottom: 30px;
 }
 
 .pagination-wrap a,
