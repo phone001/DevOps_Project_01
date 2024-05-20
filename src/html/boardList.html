@@ -23,15 +23,15 @@
         </div>
 
         <div id="container">
-            <div class="title-font">고객문의</div>
-            <div class="search-wrap">
+            <div class="title-font"><a href="./boardList.html">고객문의</a></div>
+            <!-- <div class="search-wrap">
                 <select name="" id="searchTarget">
-                    <option value="title" selected>제목</option>
-                    <option value="userNickname">작성자</option>
+                    <option value="getTitle" selected>제목</option>
+                    <option value="getName">작성자</option>
                 </select>
                 <input type="text" id="searchValue">
                 <button id="searchBtn">검색</button>
-            </div>
+            </div> -->
             <div class="content-wrap">
                 <div class="top-content-layouts">
                     <div class="content-num">번호</div>
@@ -42,102 +42,6 @@
 
                 <!-- rend 영역 -->
                 <div class="contents">
-                    <div class="content-layouts">
-                        <div class="content-num">1</div>
-                        <div class="content-title"><a href="#">임시</a></div>
-                        <div class="content-auther">등록</div>
-                        <div class="content-date">게시글</div>
-                    </div>
-                    <div class="content-layouts">
-                        <div class="content-num">1</div>
-                        <div class="content-title"><a href="#">임시</a></div>
-                        <div class="content-auther">등록</div>
-                        <div class="content-date">게시글</div>
-                    </div>
-                    <div class="content-layouts">
-                        <div class="content-num">1</div>
-                        <div class="content-title"><a href="#">임시</a></div>
-                        <div class="content-auther">등록</div>
-                        <div class="content-date">게시글</div>
-                    </div>
-                    <div class="content-layouts">
-                        <div class="content-num">1</div>
-                        <div class="content-title"><a href="#">임시</a></div>
-                        <div class="content-auther">등록</div>
-                        <div class="content-date">게시글</div>
-                    </div>
-                    <div class="content-layouts">
-                        <div class="content-num">1</div>
-                        <div class="content-title"><a href="#">임시</a></div>
-                        <div class="content-auther">등록</div>
-                        <div class="content-date">게시글</div>
-                    </div>
-                    <div class="content-layouts">
-                        <div class="content-num">1</div>
-                        <div class="content-title"><a href="#">임시</a></div>
-                        <div class="content-auther">등록</div>
-                        <div class="content-date">게시글</div>
-                    </div>
-                    <div class="content-layouts">
-                        <div class="content-num">1</div>
-                        <div class="content-title"><a href="#">임시</a></div>
-                        <div class="content-auther">등록</div>
-                        <div class="content-date">게시글</div>
-                    </div>
-                    <div class="content-layouts">
-                        <div class="content-num">1</div>
-                        <div class="content-title"><a href="#">임시</a></div>
-                        <div class="content-auther">등록</div>
-                        <div class="content-date">게시글</div>
-                    </div>
-                    <div class="content-layouts">
-                        <div class="content-num">1</div>
-                        <div class="content-title"><a href="#">임시</a></div>
-                        <div class="content-auther">등록</div>
-                        <div class="content-date">게시글</div>
-                    </div>
-                    <div class="content-layouts">
-                        <div class="content-num">1</div>
-                        <div class="content-title"><a href="#">임시</a></div>
-                        <div class="content-auther">등록</div>
-                        <div class="content-date">게시글</div>
-                    </div>
-                    <div class="content-layouts">
-                        <div class="content-num">1</div>
-                        <div class="content-title"><a href="#">임시</a></div>
-                        <div class="content-auther">등록</div>
-                        <div class="content-date">게시글</div>
-                    </div>
-                    <div class="content-layouts">
-                        <div class="content-num">1</div>
-                        <div class="content-title"><a href="#">임시</a></div>
-                        <div class="content-auther">등록</div>
-                        <div class="content-date">게시글</div>
-                    </div>
-                    <div class="content-layouts">
-                        <div class="content-num">1</div>
-                        <div class="content-title"><a href="#">임시</a></div>
-                        <div class="content-auther">등록</div>
-                        <div class="content-date">게시글</div>
-                    </div>
-                    <div class="content-layouts">
-                        <div class="content-num">1</div>
-                        <div class="content-title"><a href="#">임시</a></div>
-                        <div class="content-auther">등록</div>
-                        <div class="content-date">게시글</div>
-                    </div>
-                    <div class="content-layouts">
-                        <div class="content-num">1</div>
-                        <div class="content-title"><a href="#">임시</a></div>
-                        <div class="content-auther">등록</div>
-                        <div class="content-date">게시글</div>
-                    </div>
-                    <div class="content-layouts">
-                        <div class="content-num">1</div>
-                        <div class="content-title"><a href="#">임시</a></div>
-                        <div class="content-auther">등록</div>
-                        <div class="content-date">게시글</div>
-                    </div>
                 </div>
             </div>
 
@@ -147,18 +51,28 @@
 
             <div class="pagination-wrap">
                 <em>1</em>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
+                <a href="./boardList.html?page=2">2</a>
+                <a href="./boardList.html?page=3">3</a>
+                <a href="./boardList.html?page=4">4</a>
             </div>
 
         </div>
 
     </div>
+    <!-- <button style="width: 100px; height: 40px;" class="eeewww" value="dd"></button> -->
 </body>
 <script src="../js/boardClass.js"></script>
 <script src="../js/boardManagerClass.js"></script>
-<script src="../js/userClass.js"></script>
-<script src="../js/userManagerClass.js"></script>
+<script src="../js/boardList.js"></script>
+<!-- <script src="../js/userClass.js"></script>
+<script src="../js/userManagerClass.js"></script> -->
+
+<!-- <script>
+    const board = new Board("123", "test2", "asdasdasd");
+    const boardManager = new BoardManager();
+    for (let i = 0; i < 30; i++) {
+        boardManager.addBoard(board)
+    }
+</script> -->
 
 </html>
