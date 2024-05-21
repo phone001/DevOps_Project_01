@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객문의</title>
+    <link rel="stylesheet" href="../resource/css/boardList.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <!-- 헤더 -->
+        <div id="headder">
+            <div class="headder-img">
+                <img src="../resource/img/logo.gif" alt="로고이미지">
+            </div>
+            <!-- 로그인 시 innerHTML로 제어해야함 -->
+            <div class="redirectBtn">
+            </div>
+        </div>
+
+        <div id="container">
+            <div class="title-font"><a href="./boardList.html">고객문의</a></div>
+            <div class="search-wrap">
+                <select name="" id="searchTarget">
+                    <option value="getTitle" selected>제목</option>
+                    <option value="getName">작성자</option>
+                </select>
+                <input type="text" id="searchValue">
+                <button id="searchBtn">검색</button>
+            </div>
+            <div class="content-wrap">
+                <div class="top-content-layouts">
+                    <div class="content-num">번호</div>
+                    <div class="content-title">제목</div>
+                    <div class="content-auther">작성자</div>
+                    <div class="content-date">등록일</div>
+                </div>
+
+                <!-- rend 영역 -->
+                <div class="contents">
+                </div>
+            </div>
+
+            <div class="contact-btn-wrap">
+                <button id="contactBtn">문의하기</button>
+            </div>
+
+            <div class="pagination-wrap">
+            </div>
+
+        </div>
+
+    </div>
+</body>
+<script src="../js/boardClass.js"></script>
+<script src="../js/boardManagerClass.js"></script>
+<script src="../js/boardList.js"></script>
+<script src="../js/boardList2.js"></script>
+
+</html>
