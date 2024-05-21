@@ -22,16 +22,17 @@ a {
     align-items: center;
 }
 
+
 .redirectBtn {
-    position: absolute;
-    right: 50px;
+    position: relative;
+    left: 350px;
     font-size: 14px;
     /* background-color: #999; */
 }
 
-.redirectBtn.state-user {
+/* .redirectBtn.state-user {
     background-color: #432C10;
-}
+} */
 
 #container {
     width: 950px;
