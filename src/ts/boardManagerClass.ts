@@ -8,7 +8,7 @@ class BoardManager {
         if (localStorage.getItem("boardList") === null) {
             this.boardList = [];
         } else {
-            this.boardList = JSON.parse(localStorage.getItem("boardList")).map((e) => { return new Board(e.title, e.name, e.content, e.date) });
+            this.boardList = JSON.parse(localStorage.getItem("boardList")).map((e) => { return new Board(e.title, e.name, e.content, e.index, e.date) });
         }
     }
 

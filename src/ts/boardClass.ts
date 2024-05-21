@@ -3,11 +3,13 @@ class Board {
     private name: string;
     private date: Date;
     private content: string;
-    constructor(title: string, name: string, content: string, date: Date = new Date()) {
+    private index: number;
+    constructor(title: string, name: string, content: string, index: number, date: Date = new Date()) {
         this.title = title;
         this.name = name;
         this.date = date;
         this.content = content;
+        this.index = index;
     }
 
     getTitle(): string {
@@ -30,12 +32,20 @@ class Board {
         return this.content;
     }
 
+    getIndex(): number {
+        return this.index;
+    }
+
     setTitle(title: string) {
         this.title = title;
     }
 
     setContent(content: string) {
         this.content = content;
+    }
+
+    setIndex(index: number) {
+        this.index = index;
     }
 
     updateBoard(title: string, content: string) {
