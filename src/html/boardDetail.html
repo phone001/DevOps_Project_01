@@ -23,6 +23,28 @@
             const board = list.getBoardList()[boardIndex];
             title.value = board.getTitle();
             editor.setData(board.getContent())
+            //sessionStorage.setItem("currnetuser", JSON.stringify({ loginid: "test", name: "김기현" }));
+            const sessionObj = sesstionCheck() ? JSON.parse(sessionStorage.getItem("currentuser")) : null;
+            const name = sessionObj === null ? null : sessionObj.name;
+            if ((name !== null && name !== undefined) && name === board.getName()) {
+                const btnBox = document.querySelector(".btn-box");
+                const updateBtn = document.createElement("button");
+                const deleteBtn = document.createElement("button");
+                updateBtn.classList.add("boardUpdateBtn");
+                updateBtn.type = "button"
+                updateBtn.innerHTML = "수정"
+                updateBtn.onclick = () => {
+                    updateBoard()
+                }
+                deleteBtn.classList.add("boardDeleteBtn");
+                deleteBtn.innerHTML = '삭제'
+                deleteBtn.type = 'button'
+                deleteBtn.onclick = () => {
+                    deleteBoard();
+                }
+                btnBox.append(updateBtn, deleteBtn);
+            }
+
         }
 
 
@@ -63,7 +85,8 @@
                             </div>
                         </div>
                         <div class="btn-box">
-                            <button>수정</button>
+                            <!-- <button type="button" class="boardUpdateBtn">수정</button>
+                            <button type="button" class="boardDeleteBtn">삭제</button> -->
                         </div>
                     </form>
                 </div>

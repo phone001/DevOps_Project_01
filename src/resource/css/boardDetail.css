@@ -139,7 +139,63 @@ button {
     padding: 3px 6px;
 }
 
+.comments {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
 
+.comments>div {
+    width: 100%;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+
+}
+
+.comment-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment-btn {
+    display: flex;
+    justify-content: end;
+}
+
+.comments>div>input {
+    width: 100%;
+    height: 30px;
+    padding: 3px 6px;
+    font-size: 100%;
+    border-radius: 6px;
+
+}
+
+.comments>div>button {
+    margin: 0 5px;
+}
+
+.addCommentForm {
+    display: flex;
+}
+
+#addReply {
+    width: 100%;
+    height: 30px;
+    border-radius: 6px;
+    padding: 3px 6px;
+    font-size: 100%;
+}
+
+.is-insert {
+    border: 1px solid;
+    width: 100%;
+    border-radius: 6px;
+    padding: 3px 6px;
+}
 
 /* ckeditor 스타일 */
 .ck {

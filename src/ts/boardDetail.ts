@@ -1,9 +1,39 @@
 const commentForm = document.querySelector("#comment-form") as HTMLFormElement;
+const boardUpdateBtn = document.querySelector(".boardUpdateBtn") as HTMLButtonElement;
+const boardDeleteBtn = document.querySelector(".boardDeleteBtn") as HTMLButtonElement;
 
+
+
+
+/* 이벤트 부분 */
 commentForm.onsubmit = function (e: Event) {
     e.preventDefault();
     commentInsert();
 }
+
+
+function updateBoard() {
+    const boardIndex = new URLSearchParams().get("index");
+    location.href = `boardUpdate.html?index=${boardIndex}`;
+}
+
+function deleteBoard() {
+    const boardindex: number = parseInt(new URLSearchParams().get("index")) || 0;
+    const manager: BoardManager = new BoardManager();
+
+    manager.deleteBoard(boardindex);
+}
+
+
+function sesstionCheck(): boolean {
+    const sessionObj = sessionStorage.getItem("currentuser");
+    if (sessionObj === null && sessionObj === undefined || sessionObj === '') {
+        return true;
+    }
+
+    return false;
+}
+
 
 function checkEmpty(value: string): boolean {
     let isEmpty = false;
@@ -16,25 +46,31 @@ function checkEmpty(value: string): boolean {
 function commentInsert() {
     const comment = document.querySelector("#comment") as HTMLTextAreaElement;
     const boardIndex = 0;
-    const name = "김기현";
+    if (sesstionCheck()) {
+        alert("로그인하세요");
+        //나중에 로그인화면으로 전환
+        return;
+    }
+    const sessionObj = JSON.parse(sessionStorage.getItem("currentuser"));
+
     if (!checkEmpty(comment.value)) {
-        const commentObj = new Comments(comment.value, name, boardIndex);
+        const commentObj = new Comments(comment.value, sessionObj.name, boardIndex);
         const commnetManager = new CommentsManager("commentsList", "replyList");
 
         commnetManager.addComments(commentObj);
         commnetManager.setCommentsList();
-        console.log(commnetManager.getReplyList());
 
-        commentRender(boardIndex, commnetManager.getCommentsList(), commnetManager.getReplyList())
+        commentRender(boardIndex, commnetManager.getCommentsList(), commnetManager.getReplyList());
+        comment.value = '';
+    } else {
+        alert("내용을 입력하세요");
     }
 }
 
 function commentRender(boardIndex: number, commentList: Comments[], replyList: Reply[]) {
-    console.log(replyList.length)
     if (commentList !== null && commentList !== undefined) {
         const _container = document.querySelector("#comment_view");
         _container.innerHTML = '';
-        let index = 0;
         for (let i = 0; i < commentList.length; i++) {
             if (commentList[i].getBoardIndex() === boardIndex) {
                 const comment_obj = {
@@ -45,8 +81,10 @@ function commentRender(boardIndex: number, commentList: Comments[], replyList: R
                 }
                 const _div = addBlock(modifyViewComment, delComment, addCommentInertView, "Comment", '수정', comment_obj);
 
+                _div.id = `${commentList[i].getName()}_${i}`;
                 if (replyList !== null && replyList !== undefined) {
                     for (let j = 0; j < replyList.length; j++) {
+
                         if (i === replyList[j].getCommentIndex()) {
                             const replyObj = {
                                 name: replyList[j].getName(),
@@ -56,117 +94,141 @@ function commentRender(boardIndex: number, commentList: Comments[], replyList: R
                             }
                             const reply_block = addBlock(modifyViewComment, delComment, addCommentInertView, 'Reply', '수정', replyObj);
 
+                            const _div2 = document.querySelector(`#${commentList[i].getName()}_${i}`);
                             reply_block.style.marginLeft = "20px";
                             _div.append(reply_block);
                         }
                     }
                 }
                 _container.append(_div);
-                index++;
             }
         }
     }
 }
 
+
 function modifyViewComment(e: Event, type: string) {
-    const current = document.querySelector(".currentUpdate")
-    if (current !== null) {
-        current.classList.remove("currentUpdate");
+    const pNode = (e.target as HTMLButtonElement).closest(".comments") as HTMLDivElement;
+    const _comment = pNode.childNodes[1] as HTMLDivElement;
+    const insertDiv = document.querySelector(".is-insert") as HTMLDivElement;
+    if (insertDiv === null || insertDiv === undefined) {
+        _comment.classList.add("is-insert");
+        const index = parseInt(pNode.dataset.index);
+
+        _comment.contentEditable = "true";
+
+        const updateBtn = pNode.querySelector(".comment-btn").childNodes[0] as HTMLButtonElement;
+        updateBtn.innerHTML = "수정완료";
+        updateBtn.onclick = function (e: Event) {
+            modifyComment(e, index, type, _comment);
+        };
+    } else if (insertDiv !== null && insertDiv !== undefined && insertDiv.id == 'addReply') {
+        (insertDiv.parentNode as HTMLDivElement).remove();
+    } else {
+        insertDiv.contentEditable = "false";
+        insertDiv.classList.remove("is-insert");
+
+        const prebtn = insertDiv.nextSibling.childNodes[0] as HTMLButtonElement
+        prebtn.innerHTML = '수정';
+
+        prebtn.onclick = (e: Event) => {
+            modifyViewComment(e, type);
+        }
+        _comment.classList.add("is-insert");
+        const index = parseInt(pNode.dataset.index);
+
+        _comment.contentEditable = "true";
+
+        const updateBtn = pNode.querySelector(".comment-btn").childNodes[0] as HTMLButtonElement;
+        updateBtn.innerHTML = "수정완료";
+        updateBtn.onclick = function (e: Event) {
+            modifyComment(e, index, type, _comment);
+        };
     }
-    const pNode = ((e.target as HTMLButtonElement).parentNode as HTMLDivElement);
-    console.log(pNode)
-    const index = parseInt(pNode.dataset.index);
-    const text = (pNode.childNodes[1] as HTMLDivElement).innerHTML;
-    const _input = document.createElement("input") as HTMLInputElement;
-    const updateBtn = document.createElement("button") as HTMLButtonElement;
-    updateBtn.id = "commentUpdate";
-    updateBtn.innerHTML = "수정완료";
-    updateBtn.onclick = function (e: Event) {
-        modifyComment(e, index, type);
-    }
-    _input.value = text;
-    _input.id = "newCommentInput";
-    pNode.childNodes[1].replaceWith(_input)
-    pNode.childNodes[3].replaceWith(updateBtn);
 }
 
 
-function modifyComment(e: Event, index: number, type: string) {
+function modifyComment(e: Event, index: number, type: string, _comment: HTMLDivElement) {
+    const boardIndex = parseInt(new URLSearchParams(location.search).get("index")) || 0;
     const manager = new CommentsManager("commentsList", "replyList");
-    //const input = document.querySelector("#newCommentInput") as HTMLInputElement;
-    const pNode = (e.target as HTMLButtonElement).parentNode as HTMLDivElement;
-    const input = pNode.childNodes[1] as HTMLInputElement;
-    console.log(input)
-    const oldBtn = pNode.childNodes[3] as HTMLButtonElement;
-    const value = input.value;
-    const _divComments = document.createElement("div") as HTMLDivElement;
-    _divComments.innerHTML = value;
-    input.replaceWith(_divComments)
+
+    const value = _comment.innerHTML;
+
     if (type === "Comment") {
         manager.updateComments(index, value);
     } else if (type === "Reply") {
         manager.updateReply(index, value);
     }
-    const _updateBtn = document.createElement("button") as HTMLButtonElement;
-    _updateBtn.innerHTML = '수정';
-    _updateBtn.onclick = (e: Event) => {
-        modifyViewComment(e, type);
-    }
-    oldBtn.replaceWith(_updateBtn);
+    commentRender(boardIndex, manager.getCommentsList(), manager.getReplyList());
+
 }
 
 function delComment(e: Event, type: string) {
     if (confirm("정말 삭제하시겠습니까?")) {
-        const pNode = (e.target as HTMLButtonElement).parentNode;
-        const boardIndex = parseInt(new URLSearchParams().get("index")) || 0;
+        const pNode = (e.target as HTMLButtonElement).closest(".comments") as HTMLDivElement;
+        const boardIndex = parseInt(new URLSearchParams(location.search).get("index")) || 0;
         const manager = new CommentsManager("commentsList", "replyList");
         if (type === "Comment") {
-            manager.deleteComments(parseInt((pNode as HTMLDivElement).dataset.index), boardIndex)
+            manager.deleteComments(parseInt(pNode.dataset.index), boardIndex)
         } else if ("Reply") {
-            manager.deleteReply(parseInt((pNode as HTMLDivElement).dataset.index))
+            manager.deleteReply(parseInt(pNode.dataset.index));
         }
-        location.reload();
+        commentRender(boardIndex, manager.getCommentsList(), manager.getReplyList());
     }
 
 }
 
-function addCommentInertView(e: Event) {
-    const reply_input = document.querySelector(".addCommentForm");
-    if (reply_input === null) {
-        const pNode = ((e.target as HTMLButtonElement).parentNode) as HTMLDivElement;
-        console.log(pNode)
-        const target = ((pNode as HTMLDivElement).childNodes[0] as HTMLDivElement).innerHTML;
+function addCommentInertView(e: Event, type: string) {
+    const insertDiv = document.querySelector(".is-insert") as HTMLDivElement;
+    if (insertDiv === null) {
+        const pNode = (e.target as HTMLButtonElement).closest(".comments") as HTMLDivElement;
+
         const _div = document.createElement("div") as HTMLDivElement;
 
-        _div.classList.add("addCommentForm");
-        _div.style.marginLeft = "20px"
-        const _divName = document.createElement("div") as HTMLDivElement;
-        const addComments = document.createElement("input") as HTMLInputElement;
-        // addComments.value = `@${target} `
-        const _divDate = document.createElement("div") as HTMLDivElement;
+        const addComments = document.createElement("div") as HTMLDivElement;
+        addComments.contentEditable = "true";
+        addComments.style.border = "1px solid"
+        addComments.id = "addReply"
+        addComments.classList.add("is-insert")
         const _upbtn = document.createElement("button") as HTMLButtonElement;
         _upbtn.innerHTML = '추가';
+
         _upbtn.onclick = function () {
-            addComment(parseInt((pNode as HTMLDivElement).dataset.index), _div);
+            addComment(parseInt(pNode.dataset.index), addComments.innerHTML);
         }
-        const _delbtn = document.createElement("button") as HTMLButtonElement;
-        _delbtn.innerHTML = '삭제';
-        const _replybtn = document.createElement("button") as HTMLButtonElement;
-        _replybtn.innerHTML = '답글달기'
-        _div.append(_divName, addComments, _divDate, _upbtn, _delbtn, _replybtn)
+
+        _div.append(addComments, _upbtn)
         pNode.append(_div)
-        console.log(pNode)
-    } else if (reply_input !== null) {
-        reply_input.remove();
+    } else if (insertDiv !== null && insertDiv.id === 'addReply') {
+        (insertDiv.parentNode as HTMLDivElement).remove();
+    } else {
+        insertDiv.contentEditable = "false";
+        insertDiv.classList.remove("is-insert");
+
+        const prebtn = insertDiv.nextSibling.childNodes[0] as HTMLButtonElement
+        prebtn.innerHTML = '수정';
+
+        prebtn.onclick = (e: Event) => {
+            modifyViewComment(e, type);
+        }
     }
 }
 
-function addComment(commentIndex: number, _div: HTMLDivElement) {
+function addComment(commentIndex: number, value: string): void {
     const boardIndex = 0;
-    console.log(_div)
-    const value = (_div.childNodes[1] as HTMLInputElement).value;
-    console.log(_div)
-    const reply = new Reply(value, "test1", boardIndex, commentIndex);
+    if (sesstionCheck()) {
+        alert("로그인 하십시오");
+        //나중에 로그인화면으로 
+        //location.href = "loginSignup.html"
+        return;
+    }
+    const sessionObj = sesstionCheck() ? null : JSON.parse(sessionStorage.getItem("currentuser"));
+    const name = sessionObj === null ? null : sessionObj.name
+    if (name === null) {
+        alert("로그인 정보가 없습니다.")
+        return;
+    }
+    const reply = new Reply(value, sessionObj.name, boardIndex, commentIndex);
     const replyManager = new CommentsManager("commentsList", "replyList");
     replyManager.addReply(reply);
     replyManager.setReplyList();
@@ -174,6 +236,7 @@ function addComment(commentIndex: number, _div: HTMLDivElement) {
 }
 
 function renderMain() {
+
     const boardIndex = parseInt(new URLSearchParams().get("index")) || 0;
     const commnetManager = new CommentsManager("commentsList", "replyList");
     const commentsList = commnetManager.getCommentsList();
@@ -184,34 +247,50 @@ renderMain();
 
 function addBlock(updateFn: Function, delFn: Function, addFn: Function, type: string, str: string, obj: object): HTMLDivElement {
     const _div = document.createElement('div') as HTMLDivElement;
-    const _commentBox = document.createElement("div") as HTMLDivElement;
+    const _commentTitle = document.createElement('div') as HTMLDivElement;
+    const _commentContent = document.createElement('div') as HTMLDivElement;
+    const _wrap = document.createElement('div') as HTMLDivElement;
+    const _commentBtn = document.createElement('div') as HTMLDivElement;
 
     const _divName = document.createElement('div') as HTMLDivElement;
     const _divComments = document.createElement('div') as HTMLDivElement;
     const _divDate = document.createElement('div') as HTMLDivElement;
-    const _divInputForm = document.createElement('div') as HTMLDivElement;
+    _div.classList.add("comments")
 
-    const _updateBtn = document.createElement("button") as HTMLButtonElement;
-    const _delBtn = document.createElement("button") as HTMLButtonElement;
-
-    _commentBox.dataset.index = obj["index"] + "";
-
+    _div.dataset.index = obj["index"] + "";
     _divName.innerHTML = obj["name"];
     _divComments.innerHTML = obj["comment"];
+
+
     _divDate.innerHTML = obj["date"];
 
-    _updateBtn.innerHTML = str;
-    _updateBtn.onclick = (e) => { updateFn(e, type) };
-    _delBtn.innerHTML = '삭제';
-    _delBtn.onclick = (e) => { delFn(e, type) };
+    _commentTitle.append(_divName, _divDate)
+    _commentContent.append(obj["comment"])
+    const sessionObj = JSON.parse(sessionStorage.getItem("currentuser".trim()));
 
-    _commentBox.append(_divName, _divComments, _divDate, _updateBtn, _delBtn);
+    if (!sesstionCheck() && sessionObj.name === obj["name"]) {
+        const _updateBtn = document.createElement("button") as HTMLButtonElement;
+        const _delBtn = document.createElement("button") as HTMLButtonElement;
+
+        _updateBtn.innerHTML = str;
+        _updateBtn.onclick = (e) => { updateFn(e, type) };
+        _delBtn.innerHTML = '삭제';
+        _delBtn.onclick = (e) => { delFn(e, type) };
+        _commentBtn.append(_updateBtn, _delBtn)
+    }
     if (type === "Comment") {
         const _addCommtBtn = document.createElement("button") as HTMLButtonElement;
         _addCommtBtn.innerHTML = '답글달기'
-        _addCommtBtn.onclick = (e) => { addFn(e) };
-        _commentBox.append(_addCommtBtn);
+        _addCommtBtn.onclick = (e) => { addFn(e, type) };
+        _commentBtn.append(_addCommtBtn);
     }
-    _div.append(_commentBox);
-    return _div;
+    _commentBtn.classList.add("comment-btn");
+    _commentTitle.classList.add("comment-title");
+    _commentContent.classList.add("comment-content");
+
+    _div.append(_commentTitle, _commentContent, _commentBtn)
+    _wrap.append(_div)
+
+    return _wrap;
 }
+
