@@ -54,9 +54,14 @@ class CommentsManager {
     }
     deleteComments(index: number, boardIndex: number) {
         this.commentsList.splice(index, 1);
-        for (let i = 0; i < this.replyList.length; i++) {
+        for (let i = this.replyList.length - 1; i >= 0; i--) {
             if (this.replyList[i].getCommentIndex() === index && this.replyList[i].getBoardIndex() === boardIndex) {
                 this.replyList.splice(i, 1);
+            }
+        }
+        for (let i = 0; i < this.replyList.length; i++) {
+            if (this.replyList[i].getCommentIndex() > index) {
+                this.replyList[i].setCommnetIndex(this.replyList[i].getCommentIndex() - 1);
             }
         }
 

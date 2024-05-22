@@ -15,7 +15,7 @@
         window.onload = async function () {
             window.editor = await ClassicEditor.create(document.querySelector("#content"));
             const list = new BoardManager();
-            const boardIndex = new URLSearchParams().get("index") || 0;
+            const boardIndex = new URLSearchParams(location.search).get("index");
             const board = list.getBoardList()[boardIndex];
             title.value = board.getTitle();
             editor.setData(board.getContent())
@@ -95,6 +95,7 @@
     </div>
 </body>
 
+<script src="../js/boardUpdate.js"></script>
 <script>
 
     function getEditor() {
@@ -103,16 +104,16 @@
     const _form = document.querySelector("#form");
 
     function submitHandler() {
-        let nickname = sessionStorage.getItem("currentuser");
-        const boardIndex = 0;
+        let nickname = sessionStorage.getItem("currentUser");
+        const boardIndex = parseInt(new URLSearchParams(location.search).get("index"));
 
         const title = document.querySelector("#title").value;
         const content = editor.getData();
 
-        if (!emptyCheck(title) && !emptyCheck(content)) {
-            const boardList = new BoardManager();
-            boardList.updateBoard(boardIndex, title, content);
-        }
+
+        const boardList = new BoardManager();
+        boardList.updateBoard(boardIndex, title, content);
+        location.href = `boardDetail.html?index=${boardIndex}`;
 
     }
     _form.onsubmit = function (e) {

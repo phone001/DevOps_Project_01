@@ -13,20 +13,21 @@ commentForm.onsubmit = function (e: Event) {
 
 
 function updateBoard() {
-    const boardIndex = new URLSearchParams().get("index");
+    const boardIndex = parseInt(new URLSearchParams(location.search).get("index"));
+
     location.href = `boardUpdate.html?index=${boardIndex}`;
 }
 
 function deleteBoard() {
-    const boardindex: number = parseInt(new URLSearchParams().get("index")) || 0;
+    const boardindex: number = parseInt(new URLSearchParams(location.search).get("index"));
     const manager: BoardManager = new BoardManager();
 
-    manager.deleteBoard(boardindex);
+    //manager.deleteBoard(boardindex);
 }
 
 
 function sesstionCheck(): boolean {
-    const sessionObj = sessionStorage.getItem("currentuser");
+    const sessionObj = sessionStorage.getItem("currentUser");
     if (sessionObj === null && sessionObj === undefined || sessionObj === '') {
         return true;
     }
@@ -45,16 +46,20 @@ function checkEmpty(value: string): boolean {
 
 function commentInsert() {
     const comment = document.querySelector("#comment") as HTMLTextAreaElement;
-    const boardIndex = 0;
+    const boardIndex = parseInt(new URLSearchParams(location.search).get("index"));
+
     if (sesstionCheck()) {
         alert("로그인하세요");
         //나중에 로그인화면으로 전환
         return;
     }
-    const sessionObj = JSON.parse(sessionStorage.getItem("currentuser"));
-
+    const sessionObj = JSON.parse(sessionStorage.getItem("currentUser"));
+    if (sessionObj === null) {
+        alert("로그인 정보가 없습니다.");
+        return;
+    }
     if (!checkEmpty(comment.value)) {
-        const commentObj = new Comments(comment.value, sessionObj.name, boardIndex);
+        const commentObj = new Comments(comment.value, sessionObj.nickname, boardIndex);
         const commnetManager = new CommentsManager("commentsList", "replyList");
 
         commnetManager.addComments(commentObj);
@@ -72,6 +77,7 @@ function commentRender(boardIndex: number, commentList: Comments[], replyList: R
         const _container = document.querySelector("#comment_view");
         _container.innerHTML = '';
         for (let i = 0; i < commentList.length; i++) {
+
             if (commentList[i].getBoardIndex() === boardIndex) {
                 const comment_obj = {
                     name: commentList[i].getName(),
@@ -85,7 +91,7 @@ function commentRender(boardIndex: number, commentList: Comments[], replyList: R
                 if (replyList !== null && replyList !== undefined) {
                     for (let j = 0; j < replyList.length; j++) {
 
-                        if (i === replyList[j].getCommentIndex()) {
+                        if (replyList[j].getBoardIndex() === boardIndex && i === replyList[j].getCommentIndex()) {
                             const replyObj = {
                                 name: replyList[j].getName(),
                                 comment: replyList[j].getAddComment(),
@@ -149,7 +155,7 @@ function modifyViewComment(e: Event, type: string) {
 
 
 function modifyComment(e: Event, index: number, type: string, _comment: HTMLDivElement) {
-    const boardIndex = parseInt(new URLSearchParams(location.search).get("index")) || 0;
+    const boardIndex = parseInt(new URLSearchParams(location.search).get("index"));
     const manager = new CommentsManager("commentsList", "replyList");
 
     const value = _comment.innerHTML;
@@ -166,7 +172,7 @@ function modifyComment(e: Event, index: number, type: string, _comment: HTMLDivE
 function delComment(e: Event, type: string) {
     if (confirm("정말 삭제하시겠습니까?")) {
         const pNode = (e.target as HTMLButtonElement).closest(".comments") as HTMLDivElement;
-        const boardIndex = parseInt(new URLSearchParams(location.search).get("index")) || 0;
+        const boardIndex = parseInt(new URLSearchParams(location.search).get("index"));
         const manager = new CommentsManager("commentsList", "replyList");
         if (type === "Comment") {
             manager.deleteComments(parseInt(pNode.dataset.index), boardIndex)
@@ -215,20 +221,20 @@ function addCommentInertView(e: Event, type: string) {
 }
 
 function addComment(commentIndex: number, value: string): void {
-    const boardIndex = 0;
+    const boardIndex = parseInt(new URLSearchParams(location.search).get("index"));
     if (sesstionCheck()) {
         alert("로그인 하십시오");
         //나중에 로그인화면으로 
         //location.href = "loginSignup.html"
         return;
     }
-    const sessionObj = sesstionCheck() ? null : JSON.parse(sessionStorage.getItem("currentuser"));
-    const name = sessionObj === null ? null : sessionObj.name
+    const sessionObj = sesstionCheck() ? null : JSON.parse(sessionStorage.getItem("currentUser"));
+    const name = sessionObj === null ? null : sessionObj.nickname
     if (name === null) {
         alert("로그인 정보가 없습니다.")
         return;
     }
-    const reply = new Reply(value, sessionObj.name, boardIndex, commentIndex);
+    const reply = new Reply(value, sessionObj.nickname, boardIndex, commentIndex);
     const replyManager = new CommentsManager("commentsList", "replyList");
     replyManager.addReply(reply);
     replyManager.setReplyList();
@@ -237,7 +243,7 @@ function addComment(commentIndex: number, value: string): void {
 
 function renderMain() {
 
-    const boardIndex = parseInt(new URLSearchParams().get("index")) || 0;
+    const boardIndex = parseInt(new URLSearchParams(location.search).get("index"));
     const commnetManager = new CommentsManager("commentsList", "replyList");
     const commentsList = commnetManager.getCommentsList();
     const replyList = commnetManager.getReplyList();
@@ -266,9 +272,9 @@ function addBlock(updateFn: Function, delFn: Function, addFn: Function, type: st
 
     _commentTitle.append(_divName, _divDate)
     _commentContent.append(obj["comment"])
-    const sessionObj = JSON.parse(sessionStorage.getItem("currentuser".trim()));
+    const sessionObj = JSON.parse(sessionStorage.getItem("currentUser"));
 
-    if (!sesstionCheck() && sessionObj.name === obj["name"]) {
+    if (!sesstionCheck() && sessionObj.nickname === obj["name"]) {
         const _updateBtn = document.createElement("button") as HTMLButtonElement;
         const _delBtn = document.createElement("button") as HTMLButtonElement;
 

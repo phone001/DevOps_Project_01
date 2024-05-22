@@ -29,10 +29,5 @@ class BoardManager {
     setBoardList() {
         localStorage.setItem("boardList", JSON.stringify(this.boardList));
     }
-    deleteBoard(boardIndex: number) {
-        const commenManager: CommentsManager = new CommentsManager("commentsList", "replyList");
-        commenManager.deleteBoard(boardIndex);
-        this.boardList.splice(boardIndex, 1);
-        this.setBoardList();
-    }
+
 }

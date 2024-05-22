@@ -95,12 +95,15 @@
     main();
     _form.onsubmit = (e) => {
         e.preventDefault();
-        console.log("test")
-        console.log(editor.getData().trim());
-        const board = new Board("test", "김기현", editor.getData());
+        const _title = document.querySelector("#title").value;
+        const manager = new BoardManager();
+        const session = JSON.parse(sessionStorage.getItem("currentUser"));
+
+        const board = new Board(_title, session.nickname, editor.getData(), manager.getBoardList().length);
         const list = new BoardManager();
 
         list.addBoard(board);
+        location.href = "boardList.html";
     }
 
 </script>

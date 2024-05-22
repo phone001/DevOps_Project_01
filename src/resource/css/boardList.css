@@ -127,6 +127,14 @@ a {
     width: calc(100% - 330px);
 }
 
+.content-title>a {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .content-layouts>.content-title {
     display: flex;
     align-items: center;

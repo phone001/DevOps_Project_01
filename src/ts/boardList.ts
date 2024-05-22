@@ -30,7 +30,7 @@ function boardListRender(index: number) {
     const boardManager = new BoardManager();
     const boardList: Board[] = boardManager.getBoardList();
     let startI = boardList.length - 1 - (20 * (index - 1));
-    let endI = startI - 20 < 0 ? 0 : startI - 20;
+    let endI = startI - 19 < 0 ? 0 : startI - 19;
     for (startI; startI >= endI; startI--) {
         boardRender(startI);
     }
@@ -48,8 +48,6 @@ function pagenation(_totalPage: number, _pageNum: number) {
     let lastNum = Math.ceil(pageGroup * 5);
     if (lastNum > totalPage) lastNum = totalPage;
     let firstNum = Math.ceil((pageGroup - 1) * 5 + 1);
-
-    console.log(totalPage);
 
     function searchUrl() {
         if (!(urlSearch.get("searchTarget") === null)) {

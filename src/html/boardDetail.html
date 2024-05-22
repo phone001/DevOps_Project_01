@@ -18,16 +18,19 @@
         window.onload = async function () {
             let editor = await ClassicEditor.create(document.querySelector("#content"));
             editor.enableReadOnlyMode('content');
-            const boardIndex = new URLSearchParams().get("index") || 0;
+            const boardIndex = parseInt(new URLSearchParams(location.search).get("index"));
+
             const list = new BoardManager();
             const board = list.getBoardList()[boardIndex];
             title.value = board.getTitle();
             editor.setData(board.getContent())
             //sessionStorage.setItem("currnetuser", JSON.stringify({ loginid: "test", name: "김기현" }));
-            const sessionObj = sesstionCheck() ? JSON.parse(sessionStorage.getItem("currentuser")) : null;
-            const name = sessionObj === null ? null : sessionObj.name;
+            const sessionObj = !sesstionCheck() ? JSON.parse(sessionStorage.getItem("currentUser")) : null;
+            const name = sessionObj === null ? null : sessionObj.nickname;
+
+
+            const btnBox = document.querySelector(".btn-box");
             if ((name !== null && name !== undefined) && name === board.getName()) {
-                const btnBox = document.querySelector(".btn-box");
                 const updateBtn = document.createElement("button");
                 const deleteBtn = document.createElement("button");
                 updateBtn.classList.add("boardUpdateBtn");
@@ -44,7 +47,11 @@
                 }
                 btnBox.append(updateBtn, deleteBtn);
             }
-
+            const locationBtn = document.createElement("button");
+            locationBtn.innerHTML = '목록보기';
+            locationBtn.type = "button"
+            locationBtn.onclick = () => { location.href = "boardList.html"; }
+            btnBox.append(locationBtn);
         }
 
 

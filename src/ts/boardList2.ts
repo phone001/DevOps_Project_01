@@ -46,11 +46,9 @@ function searchListRender(index: number, value: string, searchTarget: string) {
     const contents = document.querySelector(".contents");
     contents.innerHTML = "";
     let startI = searchResult.length - 1 - (20 * (index - 1));
-    let endI = startI - 20 < 0 ? 0 : startI - 20;
+    let endI = startI - 19 < 0 ? 0 : startI - 19;
 
     for (startI; startI >= endI; startI--) {
-        console.log(endI);
-        console.log(searchResult[startI]);
         if (searchTarget === "") {
             break;
         }
