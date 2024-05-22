@@ -1,0 +1,263 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+body {
+    min-height: 1382px;
+    font-family: Dotum, '돋움', sans-serif, Arial, Helvetica;
+}
+
+
+
+/* 헤더 */
+#head {
+    width: 100%;
+    height: 90px;
+    background-color: #EFE3C8;
+    z-index: 20;
+}
+
+#header {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 20;
+}
+
+
+
+/* 로고 */
+.logo {
+    width: 260px;
+    margin: 0 auto;
+}
+
+.logo a {
+    display: inline-block;
+    width: 202px;
+    height: 50px;
+    margin-top: 20px;
+    background: url(../img/main/logo.gif);
+    text-indent: -9999%;
+    overflow: hidden;
+}
+
+
+
+
+/* 로그인 */
+.loginArea {
+    position: absolute;
+    top: 11px;
+    /* right: 191px; */
+    right: 89px;
+}
+
+.loginArea>a {
+    position: relative;
+    float: left;
+    color: #856f56;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.loginArea>a::before {
+    position: absolute;
+    top: 2px;
+    right: -15px;
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 10px;
+    background: #d2c4a5;
+}
+
+
+
+
+
+/* 예약확인 */
+.resrve-confirm {
+    position: absolute;
+    top: 0;
+    /* right: 102px; */
+    right: 0px;
+}
+
+.resrve-confirm-box {
+    display: inline-block;
+    vertical-align: top;
+    width: 84px;
+    background: #f1e3c4 url(../img/main/resvConBox.jpg) no-repeat 50% 5px;
+    z-index: 20;
+    position: relative;
+}
+
+.resrve-confirm-box.on {
+    background: #bfaf9d url(../img/main/resvConBoxOn.jpg) no-repeat 50% 5px;
+}
+
+.resrve-confirm-box.on>a {
+    color: #fff;
+}
+
+.resrve-confirm-box.on .resrve-btn {
+    border-bottom: 1px solid #ac9d8d;
+}
+
+.list {
+    display: none;
+}
+
+
+.list li {
+    background: url(../img/main/icoDot.gif) no-repeat 13px 14px;
+}
+
+.list li a:hover {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.list li.style1 a {
+    display: block;
+    height: 31px;
+    line-height: 31px;
+    margin: 1px 0 0 0;
+    padding-left: 22px;
+    text-align: left;
+    color: #fff;
+}
+
+.resrve-btn {
+    display: inline-block;
+    width: 74px;
+    height: 24px;
+    line-height: 24px;
+    padding: 6px 0 5px 10px;
+    color: #856f56;
+    border-bottom: 1px solid #f1e3c4;
+}
+
+
+
+
+/* 호텔찾기 */
+.hotel-box {
+    position: absolute;
+    left: 0;
+    top: 39px;
+    width: 111px;
+    height: 51px;
+    background: url(../img/main/main_hotelsch.png) no-repeat 0px 0px;
+}
+
+
+
+
+/* header 예약 */
+.rsv-box {
+    position: absolute;
+    left: 150px;
+    top: 39px;
+    width: 83px;
+    height: 51px;
+    background: url(../img/main/hubMnuResevation.gif) no-repeat;
+}
+
+
+
+
+/* 네비게이션바 */
+.nav-bar {
+    position: absolute;
+    right: 0;
+    top: 39px;
+}
+
+.nav-bar ul {
+    overflow: hidden;
+}
+
+.nav-bar li {
+    float: left;
+    margin-left: 40px;
+}
+
+.nav1 a {
+    position: relative;
+    display: inline-block;
+    width: 112px;
+    height: 51px;
+    text-indent: -9999px;
+    overflow: hidden;
+    background: url(../img/main/hubMnuIntro.gif) no-repeat;
+}
+
+.nav1:hover a::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 4px;
+    background: #3e2b2c;
+}
+
+.nav2 a {
+    position: relative;
+    display: inline-block;
+    width: 76px;
+    height: 51px;
+    text-indent: -9999px;
+    overflow: hidden;
+    background: url(../img/main/hubMnuQuestion.gif) no-repeat;
+}
+
+.nav2:hover a::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 4px;
+    background: #3e2b2c;
+}
+
+.nav3 a {
+    position: relative;
+    display: inline-block;
+    width: 92px;
+    height: 51px;
+    text-indent: -9999px;
+    overflow: hidden;
+    background: url(../img/main/hubMnuRewards.gif) no-repeat;
+}
+
+.nav3:hover a::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 4px;
+    background: #3e2b2c;
+}

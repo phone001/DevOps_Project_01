@@ -99,18 +99,31 @@ searchInput.onkeydown = (e: KeyboardEvent) => {
 
 // 로그인 상태 체크
 function storageChk() {
-    const redirectBtn = document.querySelector(".redirectBtn") as HTMLDivElement;
+    const loginArea = document.querySelector(".loginArea") as HTMLDivElement;
     if (sessionStorage.getItem("currentUser") === null) {
-        redirectBtn.innerHTML = `<a href="../html/loginSignup.html">로그인</a>`;
+        loginArea.innerHTML = `<a href="../html/loginSignup.html">로그인</a>`;
     } else {
         const currentUser: { loginId: string, nickname: string } = JSON.parse(sessionStorage.getItem("currentUser"));
-        redirectBtn.innerHTML = `<a href="#">${currentUser.nickname}님</a>`;
+        loginArea.innerHTML = `<a href="#">${currentUser.nickname}님</a><span id="logoutBtn">로그아웃</span>`;
+    }
+}
+
+// 로그아웃
+window.onload = (e: Event) => {
+    const logoutBtn = document.querySelector("#logoutBtn") as HTMLSpanElement;
+    logoutBtn.onclick = (e: Event) => {
+        sessionStorage.clear();
+        location.reload();
     }
 }
 
 // 문의하기 버튼 클릭 시 페이지 이동
 const contactBtn = document.querySelector("#contactBtn") as HTMLButtonElement;
 contactBtn.onclick = (e: Event) => {
+    if (sessionStorage.getItem("currentUser") === null) {
+        alert("로그인 후 이용해 주세요.");
+        return;
+    }
     location.href = "../html/boardWrite.html";
 }
 

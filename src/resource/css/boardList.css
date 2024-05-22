@@ -13,7 +13,7 @@ a {
     min-width: 1382px;
 }
 
-#headder {
+#header {
     width: 100%;
     height: 90px;
     background-color: #EFE3C8;
@@ -23,16 +23,23 @@ a {
 }
 
 
-.redirectBtn {
+.loginArea {
     position: relative;
     left: 350px;
     font-size: 14px;
-    /* background-color: #999; */
 }
 
-/* .redirectBtn.state-user {
+.loginArea>a {
+    padding-right: 2px;
+}
+
+#logoutBtn {
+    color: white;
     background-color: #432C10;
-} */
+    margin-left: 2px;
+    cursor: pointer;
+}
+
 
 #container {
     width: 950px;
@@ -86,6 +93,10 @@ a {
 }
 
 /* 글목록 */
+#container {
+    min-height: calc(100vh - 281px);
+}
+
 .content-wrap {
     width: 100%;
     border-top: 4px solid #432C10;
@@ -170,6 +181,7 @@ a {
     height: 35px;
     color: white;
     background-color: #432C10;
+    border: 0;
     border-radius: 6px;
     cursor: pointer;
 }
@@ -198,4 +210,32 @@ a {
 
 .pagination-wrap a:hover {
     text-decoration: underline;
+}
+
+.footer {
+    width: 100%;
+    margin: 0;
+    background-color: #F1EBD6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer>div:nth-child(2)>div:nth-child(1) {
+    display: flex;
+
+}
+
+.footer>div:nth-child(2)>div:nth-child(1)>div {
+    margin: 0 20px;
+}
+
+.footer>div:nth-child(2)>div:nth-child(2) {
+    width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e3dec9;
+    margin: 10px 0;
+    padding: 10px 0;
 }
