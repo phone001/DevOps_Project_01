@@ -1,0 +1,208 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    /* display: none; */
+}
+
+#popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 243px);
+
+}
+
+#popup>div {
+    width: 30%;
+    height: 250px;
+    background-color: #EFE3C8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+}
+
+#popup>div>label::before,
+#popup>div>label::after {
+    content: '';
+    width: 20px;
+    border: 2px solid gray;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    transform: rotate(45deg);
+    border-radius: 10px;
+}
+
+
+#popup>div>label::before {
+    transform: rotate(-45deg);
+}
+
+
+#passwordCheckform {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#passwordCheckform>div {
+    display: flex;
+    justify-content: center;
+}
+
+#passwordCheckform input {
+    width: 60%;
+    height: 20px;
+    padding: 3px 6px;
+    margin: 10px 0;
+    border-radius: 6px;
+
+}
+
+#passwordCheckform button {
+    width: 65%;
+    height: 30px;
+    background-color: #3A3125;
+    border-radius: 6px;
+    color: white;
+    font-size: 100%;
+}
+
+.is-active {
+    display: flex;
+}
+
+
+#container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.header {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #EFE3C8;
+}
+
+.header>div:nth-child(2) {
+    position: absolute;
+    right: 50px;
+}
+
+.header>div:nth-child(2)>a {
+    text-decoration: none;
+    color: black;
+}
+
+
+.content {
+    width: 100%;
+    min-height: calc(100vh - 243px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.content>div {
+    width: 500px;
+    padding: 20px;
+    border: 1px solid;
+    border-radius: 6px;
+}
+
+.content h2 {
+    text-align: center;
+}
+
+#form {
+    padding: 10px;
+}
+
+#form>div {
+    margin: 30px;
+}
+
+#form>div>div {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+
+#form>div>div>input {
+    width: 100%;
+    height: 20px;
+    border-radius: 6px;
+    border: 1px solid;
+    padding: 3px 6px;
+    font-size: 14px;
+}
+
+#loginId {
+    background-color: rgb(227, 227, 227);
+}
+
+#form>div:nth-child(3) {
+    display: flex;
+    justify-content: space-between;
+}
+
+#form label {
+    display: inline-block;
+    width: 100%;
+
+}
+
+#form>div>button {
+    width: 45%;
+    height: 30px;
+    border-radius: 6px;
+    background-color: #3A3125;
+    color: white;
+    font-size: 14px;
+    border: none;
+    outline: none;
+}
+
+
+.footer {
+    width: 100%;
+    margin: 0;
+    background-color: #F1EBD6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer>div:nth-child(2)>div:nth-child(1) {
+    display: flex;
+
+}
+
+.footer>div:nth-child(2)>div:nth-child(1)>div {
+    margin: 0 20px;
+}
+
+.footer>div:nth-child(2)>div:nth-child(2) {
+    width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e3dec9;
+    margin: 10px 0;
+    padding: 10px 0;
+}
