@@ -46,14 +46,13 @@
 }
 
 
-.content>div:nth-child(1) {
-    padding: 0;
+.title {
+    display: flex;
+    justify-content: center;
 }
-
 
 #form {
     width: 100%;
-    padding: 10px;
     box-sizing: border-box;
 }
 
@@ -75,6 +74,10 @@
 .btn-box {
     display: flex;
     justify-content: end;
+}
+
+.btn-box>button {
+    margin-left: 10px;
 }
 
 button {
