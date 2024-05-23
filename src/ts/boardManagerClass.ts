@@ -21,6 +21,15 @@ class BoardManager {
         this.setBoardList();
     }
 
+    updateBoardNickname(oldName: string, newName: string) {
+        this.boardList.map((item) => {
+            if (oldName === item.getName()) {
+                item.setName(newName);
+            }
+        })
+        this.setBoardList();
+    }
+
     addBoard(newBoard: Board) {
         this.boardList.push(newBoard);
         this.setBoardList()
