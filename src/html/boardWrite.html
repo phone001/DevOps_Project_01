@@ -16,7 +16,7 @@
             <div>
                 <img src="../resource/img/logo.gif">
             </div>
-            <div>
+            <div class="loginForm">
                 <a href="">로그인</a>
             </div>
         </div>
@@ -87,9 +87,24 @@
 
     let editor = null;
     const _form = document.querySelector("#form");
-    async function main() {
-        editor = await ClassicEditor.create(document.querySelector("#content"));
+    function loginCheck() {
+        const check = document.querySelector(".loginForm");
 
+        const session = sessionStorage.getItem("currentUser") === null ? null : JSON.parse(sessionStorage.getItem("currentUser"));
+        if (session !== null) {
+            const _span = document.createElement("span");
+            _span.innerHTML = "로그아웃"
+            _span.onclick = () => {
+                sessionStorage.clear();
+                location.reload();
+            }
+            check.innerHTML = `<a href="">${session.nickname}님</a>`
+            check.append(_span)
+        }
+    }
+    async function main() {
+        loginCheck();
+        editor = await ClassicEditor.create(document.querySelector("#content"));
     }
 
     main();
@@ -97,13 +112,16 @@
         e.preventDefault();
         const _title = document.querySelector("#title").value;
         const manager = new BoardManager();
-        const session = JSON.parse(sessionStorage.getItem("currentUser"));
+        const session = sessionStorage.getItem("currentUser") === null ? null : JSON.parse(sessionStorage.getItem("currentUser"));
+        if (session !== null) {
+            const board = new Board(_title, session.nickname, editor.getData(), manager.getBoardList().length);
+            const list = new BoardManager();
 
-        const board = new Board(_title, session.nickname, editor.getData(), manager.getBoardList().length);
-        const list = new BoardManager();
-
-        list.addBoard(board);
-        location.href = "boardList.html";
+            list.addBoard(board);
+            location.href = "boardList.html";
+        } else {
+            alert("로그인 정보가 없습니다.")
+        }
     }
 
 </script>
