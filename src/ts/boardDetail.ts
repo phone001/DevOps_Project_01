@@ -2,9 +2,6 @@ const commentForm = document.querySelector("#comment-form") as HTMLFormElement;
 const boardUpdateBtn = document.querySelector(".boardUpdateBtn") as HTMLButtonElement;
 const boardDeleteBtn = document.querySelector(".boardDeleteBtn") as HTMLButtonElement;
 
-
-
-
 /* 이벤트 부분 */
 commentForm.onsubmit = function (e: Event) {
     e.preventDefault();
@@ -19,10 +16,43 @@ function updateBoard() {
 }
 
 function deleteBoard() {
+    if (!confirm("삭제하시겠습니까?")) return;
     const boardindex: number = parseInt(new URLSearchParams(location.search).get("index"));
     const manager: BoardManager = new BoardManager();
+    const commnetsManager: CommentsManager = new CommentsManager("commentsList", "replyList");
+    const commnetsList: Comments[] = commnetsManager.getCommentsList();
+    const replyList: Reply[] = commnetsManager.getReplyList();
+    for (let i = commnetsList.length - 1; i >= 0; i--) {
+        if (commnetsList[i].getBoardIndex() === boardindex) {
+            commnetsList.splice(i, 1);
+        }
+    }
+    for (let i = 0; i < commnetsList.length; i++) {
+        if (commnetsList[i].getBoardIndex() > boardindex) {
+            commnetsList[i].setBoardIndex(commnetsList[i].getBoardIndex() - 1);
+        }
+    }
 
-    //manager.deleteBoard(boardindex);
+    for (let i = replyList.length - 1; i >= 0; i--) {
+        if (replyList[i].getBoardIndex() === boardindex) {
+            replyList.splice(i, 1);
+        }
+    }
+    for (let i = 0; i < replyList.length; i++) {
+        if (replyList[i].getBoardIndex() > boardindex) {
+            replyList[i].setBoardIndex(replyList[i].getBoardIndex() - 1);
+        }
+    }
+
+
+    for (let i = 0; i < manager.getBoardList().length; i++) {
+        if (manager.getBoardList()[i].getIndex() > boardindex) {
+            manager.getBoardList()[i].setIndex(manager.getBoardList()[i].getIndex() - 1);
+        }
+    }
+    manager.getBoardList().splice(boardindex, 1);
+    manager.setBoardList();
+    location.href = "boardList.html"
 }
 
 
@@ -100,7 +130,6 @@ function commentRender(boardIndex: number, commentList: Comments[], replyList: R
                             }
                             const reply_block = addBlock(modifyViewComment, delComment, addCommentInertView, 'Reply', '수정', replyObj);
 
-                            const _div2 = document.querySelector(`#${commentList[i].getName()}_${i}`);
                             reply_block.style.marginLeft = "20px";
                             _div.append(reply_block);
                         }
@@ -130,6 +159,15 @@ function modifyViewComment(e: Event, type: string) {
         };
     } else if (insertDiv !== null && insertDiv !== undefined && insertDiv.id == 'addReply') {
         (insertDiv.parentNode as HTMLDivElement).remove();
+        const commnetNode = pNode.querySelector(".comment-content") as HTMLDivElement;
+        commnetNode.contentEditable = "true";
+        commnetNode.classList.add("is-insert");
+        const updateBtn = pNode.querySelector(".comment-btn").childNodes[0] as HTMLButtonElement;
+        updateBtn.innerHTML = "수정완료";
+        const index = parseInt(pNode.dataset.index);
+        updateBtn.onclick = function (e: Event) {
+            modifyComment(e, index, type, _comment);
+        };
     } else {
         insertDiv.contentEditable = "false";
         insertDiv.classList.remove("is-insert");
@@ -186,6 +224,7 @@ function delComment(e: Event, type: string) {
 
 function addCommentInertView(e: Event, type: string) {
     const insertDiv = document.querySelector(".is-insert") as HTMLDivElement;
+
     if (insertDiv === null) {
         const pNode = (e.target as HTMLButtonElement).closest(".comments") as HTMLDivElement;
 
@@ -217,6 +256,25 @@ function addCommentInertView(e: Event, type: string) {
         prebtn.onclick = (e: Event) => {
             modifyViewComment(e, type);
         }
+        const pNode = (e.target as HTMLButtonElement).closest(".comments") as HTMLDivElement;
+
+        const _div = document.createElement("div") as HTMLDivElement;
+
+        const addComments = document.createElement("div") as HTMLDivElement;
+        addComments.contentEditable = "true";
+        addComments.style.border = "1px solid"
+        addComments.id = "addReply"
+        addComments.classList.add("is-insert")
+        const _upbtn = document.createElement("button") as HTMLButtonElement;
+        _upbtn.innerHTML = '추가';
+
+        _upbtn.onclick = function () {
+            addComment(parseInt(pNode.dataset.index), addComments.innerHTML);
+        }
+
+        _div.append(addComments, _upbtn)
+        pNode.append(_div)
+
     }
 }
 
@@ -272,9 +330,10 @@ function addBlock(updateFn: Function, delFn: Function, addFn: Function, type: st
 
     _commentTitle.append(_divName, _divDate)
     _commentContent.append(obj["comment"])
-    const sessionObj = JSON.parse(sessionStorage.getItem("currentUser"));
+    const sessionObj = sessionStorage.getItem("currentUser") === null ? null : JSON.parse(sessionStorage.getItem("currentUser"));
 
-    if (!sesstionCheck() && sessionObj.nickname === obj["name"]) {
+    if (sessionObj !== null && sessionObj.nickname === obj["name"]) {
+
         const _updateBtn = document.createElement("button") as HTMLButtonElement;
         const _delBtn = document.createElement("button") as HTMLButtonElement;
 

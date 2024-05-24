@@ -40,6 +40,10 @@ class Board {
         this.title = title;
     }
 
+    setName(name: string) {
+        this.name = name;
+    }
+
     setContent(content: string) {
         this.content = content;
     }

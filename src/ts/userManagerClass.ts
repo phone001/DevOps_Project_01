@@ -29,4 +29,12 @@ class UserManager {
     setUserList() {
         localStorage.setItem("userList", JSON.stringify(this.userList));
     }
+    updateAuth(auth: boolean[]) {
+        this.userList.map((item, i) => {
+            if (item.getAuth() !== auth[i]) {
+                item.setAuth(auth[i]);
+            }
+        })
+        this.setUserList();
+    }
 }

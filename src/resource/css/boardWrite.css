@@ -52,10 +52,7 @@
     justify-content: center;
 }
 
-.content>div:nth-child(1)>div {
-    display: flex;
-    justify-content: center;
-}
+
 
 #form {
     width: 100%;

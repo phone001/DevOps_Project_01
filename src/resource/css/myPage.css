@@ -1,0 +1,256 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    /* display: none; */
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+
+.PWCheck {
+    margin-top: 20px;
+}
+
+#passwordCheckform>div:nth-child(1) {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    height: 50px;
+}
+
+#passwordCheckform>div:nth-child(2) {
+    display: flex;
+    justify-content: end;
+}
+
+#passwordCheckform label {
+    background-color: #faf9f4;
+    display: inline-block;
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    width: 70px;
+    font-size: 14px;
+}
+
+#passwordCheckform input {
+    width: 70%;
+    height: 20px;
+    padding: 3px 6px;
+    margin: 10px 0;
+    outline: none;
+    border: 1px solid;
+
+}
+
+#passwordCheckform button {
+    max-width: 100px;
+    width: 65%;
+    height: 30px;
+    background-color: #3A3125;
+    border-radius: 6px;
+    color: white;
+    font-size: 100%;
+}
+
+
+
+#container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.header {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #EFE3C8;
+}
+
+.header>div:nth-child(2) {
+    position: absolute;
+    right: 50px;
+}
+
+.header>div:nth-child(2)>a {
+    text-decoration: none;
+    color: black;
+}
+
+
+.content {
+    content: 1200px;
+    min-height: calc(100vh - 243px);
+    display: flex;
+    margin-top: 60px;
+    justify-content: center;
+    align-items: start;
+}
+
+.content>div {
+    display: flex;
+    width: 1200px;
+    justify-content: space-around;
+}
+
+.myNav {
+    padding: 25px;
+    width: 200px;
+    background-color: #EFE3C8;
+}
+
+.myNav h3 {
+    height: 50px;
+    border-bottom: 4px solid;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: rgb(95, 78, 53);
+}
+
+.myNav>div>h4 {
+    border-bottom: 1px solid rgb(219, 208, 183);
+    color: rgb(95, 78, 53);
+}
+
+.myNav ul {
+    margin-top: 10px;
+}
+
+.myNav ul>li {
+    padding: 5px 5px;
+    font-size: 14px;
+    color: rgb(150, 124, 86);
+}
+
+.myInfo {
+    width: 100%;
+    padding: 20px;
+}
+
+.myInfo>div:nth-child(1) {
+    border-bottom: 4px solid;
+}
+
+.myInfo h2 {
+    height: 54px;
+    font-size: 24px;
+    color: rgb(142, 105, 55)
+}
+
+
+#form {
+    margin-top: 30px;
+}
+
+
+
+
+#form label {
+    background-color: #faf9f4;
+    display: inline-block;
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    width: 70px;
+    font-size: 14px;
+}
+
+#idForm {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    height: 50px;
+}
+
+#idForm>input {
+    width: 70%;
+    height: 20px;
+    padding: 3px 6px;
+}
+
+#nicknameForm {
+    border-bottom: 1px solid;
+}
+
+#nicknameForm>input {
+    width: 70%;
+    height: 20px;
+}
+
+#loginId {
+    background-color: rgb(227, 227, 227);
+    margin-top: 10px;
+    padding: 3px 6px;
+}
+
+#nickname {
+    margin-top: 10px;
+    padding: 3px 6px;
+    outline: none;
+    border: 1px solid gray;
+}
+
+#form>div:nth-child(3) {
+    margin-top: 20px;
+    display: flex;
+    justify-content: end;
+}
+
+
+#form>div>button {
+    max-width: 100px;
+    width: 45%;
+    height: 30px;
+    border-radius: 6px;
+    background-color: #3A3125;
+    color: white;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    margin: 0 5px;
+}
+
+
+.footer {
+    width: 100%;
+    margin: 0;
+    background-color: #F1EBD6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer>div:nth-child(2)>div:nth-child(1) {
+    display: flex;
+
+}
+
+.footer>div:nth-child(2)>div:nth-child(1)>div {
+    margin: 0 20px;
+}
+
+.footer>div:nth-child(2)>div:nth-child(2) {
+    width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e3dec9;
+    margin: 10px 0;
+    padding: 10px 0;
+}
+
+.is-active {
+    background-color: rgb(208, 192, 158);
+    display: flex;
+    justify-content: space-between;
+}

@@ -72,4 +72,19 @@ class CommentsManager {
         this.replyList.splice(index, 1);
         this.setReplyList();
     }
+
+    updateCommentsNickname(oldName: string, newName: string) {
+        this.commentsList.map((item) => {
+            if (item.getName() == oldName) {
+                item.setName(newName);
+            }
+        })
+        this.replyList.map((item) => {
+            if (item.getName() == oldName) {
+                item.setName(newName);
+            }
+        })
+        this.setCommentsList();
+        this.setReplyList();
+    }
 }
