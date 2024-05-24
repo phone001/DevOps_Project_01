@@ -91,6 +91,8 @@ form.onsubmit = (e: Event) => {
     }
     const manager: UserManager = new UserManager();
     manager.updateAuth(_authCheck)
+    alert("권한 수정이 완료되었습니다.");
+    location.reload();
 }
 
 const _allCheck = document.querySelector("#allCheckBox") as HTMLInputElement;
