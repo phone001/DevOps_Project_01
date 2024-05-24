@@ -1,33 +1,762 @@
 * {
-    padding: 0;
     margin: 0;
+    padding: 0;
+    font-size: 12px;
 }
 
-#container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.header {
-    width: 100%;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #EFE3C8;
-}
-
-.header>div:nth-child(2) {
-    position: absolute;
-    right: 50px;
-}
-
-.header>div:nth-child(2)>a {
+a {
     text-decoration: none;
     color: black;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+body {
+    min-width: 1382px;
+    font-family: Dotum, '돋움', sans-serif, Arial, Helvetica;
+}
+
+
+
+
+/*  */
+/* 헤더 */
+#head {
+    width: 100%;
+    height: 90px;
+    background-color: #EFE3C8;
+    z-index: 20;
+}
+
+#header {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 20;
+}
+
+
+
+/* 로고 */
+.logo {
+    width: 260px;
+    margin: 0 auto;
+}
+
+.logo a {
+    display: inline-block;
+    width: 202px;
+    height: 50px;
+    margin-top: 20px;
+    background: url(../img/main/logo.gif);
+    text-indent: -9999%;
+    overflow: hidden;
+}
+
+
+
+
+/* 로그인 */
+.loginArea {
+    position: absolute;
+    top: 11px;
+    /* right: 191px; */
+    right: 89px;
+}
+
+.loginArea>a {
+    position: relative;
+    float: left;
+    color: #856f56;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.loginArea>a::before {
+    position: absolute;
+    top: 2px;
+    right: -15px;
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 10px;
+    background: #d2c4a5;
+}
+
+
+
+/* 로그아웃 */
+#logoutBtn {
+    cursor: pointer;
+    position: relative;
+    float: left;
+    color: #856f56;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+
+
+
+
+/* 예약확인 */
+.resrve-confirm {
+    position: absolute;
+    top: 0;
+    /* right: 102px; */
+    right: 0px;
+}
+
+.resrve-confirm-box {
+    display: inline-block;
+    vertical-align: top;
+    width: 84px;
+    background: #f1e3c4 url(../img/main/resvConBox.jpg) no-repeat 50% 5px;
+    z-index: 20;
+    position: relative;
+}
+
+.resrve-confirm-box.on {
+    background: #bfaf9d url(../img/main/resvConBoxOn.jpg) no-repeat 50% 5px;
+}
+
+.resrve-confirm-box.on>a {
+    color: #fff;
+}
+
+.resrve-confirm-box.on .resrve-btn {
+    border-bottom: 1px solid #ac9d8d;
+}
+
+.list {
+    display: none;
+}
+
+
+.list li {
+    background: url(../img/main/icoDot.gif) no-repeat 13px 14px;
+}
+
+.list li a:hover {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.list li.style1 a {
+    display: block;
+    height: 31px;
+    line-height: 31px;
+    margin: 1px 0 0 0;
+    padding-left: 22px;
+    text-align: left;
+    color: #fff;
+}
+
+.resrve-btn {
+    display: inline-block;
+    width: 74px;
+    height: 24px;
+    line-height: 24px;
+    padding: 6px 0 5px 10px;
+    color: #856f56;
+    border-bottom: 1px solid #f1e3c4;
+}
+
+
+
+
+/* 호텔찾기 */
+.hotel-box {
+    position: absolute;
+    left: 0;
+    top: 39px;
+    width: 111px;
+    height: 51px;
+    background: url(../img/main/main_hotelsch.png) no-repeat 0px 0px;
+}
+
+.hotel-find-btn {
+    display: inline-block;
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: 51px;
+    text-indent: -9999%;
+    overflow: hidden;
+}
+
+.hotel-box.on .hotel-find-btn::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    content: "";
+    display: inline-block;
+    width: 100%;
+    height: 4px;
+    background: #3b3b3a;
+}
+
+.fh-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 984px;
+    min-height: 525px;
+    z-index: 1002;
+    background-color: #fff;
+    transform: translate(-50.1%, -49.1%);
+}
+
+
+
+
+
+/* 모달 헤더 */
+.fhm-tab-box {
+    height: 37px;
+    padding: 23px 0 0 40px;
+    background: #f7f7f7;
+}
+
+.fhm-tab1 {
+    float: left;
+    position: relative;
+}
+
+.fhm-tab1>a {
+    display: inline-block;
+    padding-bottom: 17px;
+}
+
+.fhm-tab1.on>a {
+    border-bottom: 2px solid #333;
+}
+
+.fhm-tab1>a>span {
+    width: 42px;
+    display: inline-block;
+    height: 15px;
+    overflow: hidden;
+    background: url(../img/main/txt_hotel_search_tab.png) 0 0 no-repeat;
+    background-position: 0 -20px;
+    text-indent: -9999%;
+}
+
+.fhm-tab1.on>a>span {
+    background-position: -100px -20px;
+}
+
+.fhm-tab2 {
+    float: left;
+    position: relative;
+    margin-left: 21px;
+    padding-left: 20px;
+}
+
+.fhm-tab2>a {
+    display: inline-block;
+    padding-bottom: 17px;
+}
+
+.fhm-tab2.on>a {
+    border-bottom: 2px solid #333;
+}
+
+.fhm-tab2::before {
+    display: block;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 15px;
+    background: #eaeaea;
+}
+
+.fhm-tab2>a>span {
+    width: 57px;
+    display: inline-block;
+    height: 15px;
+    overflow: hidden;
+    background: url(../img/main/txt_hotel_search_tab.png) 0 0 no-repeat;
+    text-indent: -9999%;
+}
+
+.fhm-tab2.on>a>span {
+    background-position: -100px 0;
+}
+
+.fhm-screen {
+    display: none;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    z-index: 1001;
+    position: fixed;
+    left: 0;
+    top: 0;
+    opacity: 0.5;
+}
+
+.fhm-close {
+    position: absolute;
+    top: 22px;
+    right: 20px;
+    width: 17px;
+    height: 17px;
+    background: url(../img/main/main_layerClose.png);
+    text-indent: -9999%;
+}
+
+
+
+
+
+
+/* 모달 권역별 body */
+.fhm-body1 {
+    padding: 5px 40px 0;
+}
+
+.fhm-body1 ul li {
+    padding: 25px 0 19px;
+    /* box-sizing: border-box; */
+}
+
+.fhm-region ul {
+    position: relative;
+    padding-left: 150px;
+    border-top: 1px dotted #eaeaea;
+}
+
+.fhm-region li::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.fhm-region ul:first-child {
+    border-top: 0;
+}
+
+.fhm-region ul li:nth-child(2) {
+    border-top: 0;
+}
+
+.fhm-domestic {
+    position: absolute;
+    top: 38px;
+    left: 0;
+    border-top: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.fhm-region li {
+    border-top: 1px dotted #eaeaea;
+}
+
+
+.fhm-location {
+    float: left;
+    width: 140px;
+    padding-top: 15px;
+}
+
+.fhm-select-wrap {
+    float: left;
+    width: 612px;
+    padding-left: 0 !important;
+    border-top: 0 !important;
+}
+
+.fhm-select-box {
+    border-top: 0;
+    padding: 0 !important;
+    display: inline-block;
+    margin: 0 0 5px 2px;
+}
+
+.fhm-select-box span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    width: 196px;
+    border: 1px solid #eaeaea;
+    line-height: 36px;
+    text-align: center;
+    letter-spacing: -1px;
+    color: #999;
+    font-weight: bold;
+}
+
+.fhm-select-box span:hover {
+    color: #856f56;
+}
+
+.fhm-select-box span:hover::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 195px;
+    height: 35px;
+    border: 2px solid #856f56;
+}
+
+
+
+
+
+
+/* 모달 브랜드별 body */
+.fhm-body2 {
+    padding: 5px 40px 0;
+    display: none;
+}
+
+.fhm-brand ul {
+    padding-left: 293px;
+    position: relative;
+    border-top: 1px dotted #eaeaea;
+}
+
+.fhm-brand ul:nth-child(1) {
+    border-top: 0;
+}
+
+.fhm-brand ul:nth-child(2) .fhm-brand-logo {
+    position: absolute;
+    top: 30px;
+    left: 0;
+}
+
+.fhm-brand ul li {
+    padding: 25px 0 19px;
+    box-sizing: border-box;
+}
+
+.fhm-brand-logo {
+    position: absolute;
+    top: 34px;
+    left: 0;
+    padding: 0 !important;
+}
+
+.fhm-brand-logo>span>img {
+    cursor: pointer;
+}
+
+.fhm-select-wrap2 {
+    padding: 0 !important;
+    border-top: 0 !important;
+}
+
+.fhm-select-box2 {
+    display: inline-block;
+    margin: 0 0 6px 2px;
+    padding: 0 !important;
+}
+
+.fhm-select-box2 span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    width: 196px;
+    border: 1px solid #eaeaea;
+    line-height: 36px;
+    text-align: center;
+    letter-spacing: -1px;
+    color: #999;
+    font-weight: bold;
+}
+
+.fhm-select-box2 span:hover {
+    color: #856f56;
+    font-weight: bold;
+}
+
+.fhm-select-box2 span:hover::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 195px;
+    height: 35px;
+    border: 2px solid #856f56;
+}
+
+
+
+
+
+
+/* header 예약 */
+.rsv-box {
+    position: absolute;
+    left: 150px;
+    top: 39px;
+    width: 83px;
+    height: 51px;
+    background: url(../img/main/hubMnuResevation.gif) no-repeat;
+}
+
+.rsv-btn {
+    display: inline-block;
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: 51px;
+    text-indent: -9999%;
+    overflow: hidden;
+}
+
+.rsv-box.on .rsv-btn::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    content: '';
+    display: inline-block;
+    width: 100%;
+    height: 4px;
+    background: #3b3b3a;
+}
+
+.rsv-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 1002;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    border: 1px solid #e5e5e5;
+    width: 580px;
+    height: 210px;
+    min-height: 210px;
+}
+
+.rsv-head {
+    height: 37px;
+    padding: 23px 0 0 40px;
+    background: #f7f7f7;
+}
+
+.rsv-tab li {
+    float: left;
+    position: relative;
+}
+
+.rsv-tab li a {
+    display: inline-block;
+    padding-bottom: 17px;
+}
+
+.rsv-tab li a span {
+    display: inline-block;
+    height: 15px;
+    overflow: hidden;
+    background: url(../img/main/txt_diningl_search_tab.jpg) no-repeat;
+    width: 57px;
+}
+
+.rsv-content {
+    padding: 30px 40px;
+}
+
+.rsv-hotel-link {
+    display: inline-block;
+    margin: 0 0 6px 2px;
+}
+
+.rsv-hotel-link a {
+    width: 240px;
+    height: 90px;
+    background: url(../img/main/rsv_hotell_search_img.jpg) center 23px no-repeat;
+    box-sizing: border-box;
+    padding-top: 45px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid #eaeaea;
+    line-height: 36px;
+    text-align: center;
+    letter-spacing: -1px;
+    color: #999;
+    font-weight: bold;
+}
+
+.rsv-hotel-link a:hover {
+    color: #856f56;
+    font-weight: bold;
+}
+
+.rsv-hotel-link a:hover::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 240px;
+    height: 90px;
+    border: 2px solid #856f56;
+    background: url(../img/main/rsv_hotell_search_img_on.jpg) center 22px no-repeat;
+    box-sizing: border-box;
+    top: -1px;
+    left: -1px;
+}
+
+.rsv-dining-link {
+    display: inline-block;
+    margin: 0 0 6px 2px;
+}
+
+.rsv-dining-link a {
+    width: 240px;
+    height: 90px;
+    background: url(../img/main/rsv_dining_search_img.jpg) center 21px no-repeat;
+    box-sizing: border-box;
+    padding-top: 45px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid #eaeaea;
+    line-height: 36px;
+    text-align: center;
+    letter-spacing: -1px;
+    color: #999;
+    font-weight: bold;
+}
+
+.rsv-dining-link a:hover {
+    color: #856f56;
+    font-weight: bold;
+}
+
+.rsv-dining-link a:hover::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 240px;
+    height: 90px;
+    border: 2px solid #856f56;
+    background: url(../img/main/rsv_dining_search_img_on.jpg) center 20px no-repeat;
+    box-sizing: border-box;
+    top: -1px;
+    left: -1px;
+}
+
+.rsv-close {
+    position: absolute;
+    top: 22px;
+    right: 20px;
+    width: 17px;
+    height: 17px;
+    background: url(../img/main/main_layerClose.png) 0 0 no-repeat;
+    text-indent: -9999%;
+}
+
+.rsv-screen {
+    display: none;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    zoom: 1;
+    position: fixed;
+    left: 0px;
+    z-index: 1000;
+    top: 0px;
+    opacity: 0.3;
+}
+
+
+
+
+
+/* 네비게이션바 */
+.nav-bar {
+    position: absolute;
+    right: 0;
+    top: 39px;
+}
+
+.nav-bar ul {
+    overflow: hidden;
+}
+
+.nav-bar li {
+    float: left;
+    margin-left: 40px;
+}
+
+.nav1 a {
+    position: relative;
+    display: inline-block;
+    width: 112px;
+    height: 51px;
+    text-indent: -9999px;
+    overflow: hidden;
+    background: url(../img/main/hubMnuIntro.gif) no-repeat;
+}
+
+.nav1:hover a::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 4px;
+    background: #3e2b2c;
+}
+
+.nav2 a {
+    position: relative;
+    display: inline-block;
+    width: 76px;
+    height: 51px;
+    text-indent: -9999px;
+    overflow: hidden;
+    background: url(../img/main/hubMnuQuestion.gif) no-repeat;
+}
+
+.nav2:hover a::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 4px;
+    background: #3e2b2c;
+}
+
+.nav3 a {
+    position: relative;
+    display: inline-block;
+    width: 92px;
+    height: 51px;
+    text-indent: -9999px;
+    overflow: hidden;
+    background: url(../img/main/hubMnuRewards.gif) no-repeat;
+}
+
+.nav3:hover a::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 4px;
+    background: #3e2b2c;
 }
 
 

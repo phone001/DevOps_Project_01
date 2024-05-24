@@ -1,7 +1,7 @@
 // 리다이렉트
 if (document.readyState == "loading") {
     if (sessionStorage.getItem("currentUser") !== null) {
-        location.href = "../html/boardList.html";
+        location.href = "../html/main.html";
     }
 }
 
@@ -50,7 +50,7 @@ loginBtn.onclick = (e: Event) => {
     const userList: User[] = userManager.getUserList();
     if (sessionStorage.getItem("currentUser") !== null) {
         alert("이미 로그인 된 사용자가 있습니다. 로그아웃 후 다시 요청해 주세요.");
-        location.href = "../html/boardList.html";
+        location.href = "../html/main.html";
         return;
     }
     if (_loginId === "" || _loginPw === "") {
@@ -62,7 +62,7 @@ loginBtn.onclick = (e: Event) => {
     for (let i = 0; i < userList.length; i++) {
         if (userList[i].getLoginId() === _loginId && userList[i].getPassword() === _loginPw) {
             sessionStorage.setItem("currentUser", JSON.stringify({ loginId: userList[i].getLoginId(), nickname: userList[i].getNickname() }));
-            location.href = "../html/boardList.html";
+            location.href = "../html/main.html";
             return;
         }
         if (i === userList.length - 1) {

@@ -87,6 +87,16 @@ body {
 
 
 
+/* 로그아웃 */
+#logoutBtn {
+    cursor: pointer;
+    position: relative;
+    float: left;
+    color: #856f56;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
 
 /* 예약확인 */
 .resrve-confirm {
