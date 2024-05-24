@@ -95,10 +95,10 @@ function changeBoardNicnname(oldName: string, newName: string): void {
 
 
 function view(): void {
-    const pupup = document.querySelector("#popup") as HTMLDivElement;
+    const pupup = document.querySelector(".PWCheck") as HTMLDivElement;
     pupup.style.display = "none";
-    const container = document.querySelector(".content") as HTMLDivElement;
-    container.style.display = "flex"
+    const container = document.querySelector(".infoForm") as HTMLDivElement;
+    container.style.display = "block"
 }
 
 function passwordCheck(): void {
@@ -139,10 +139,10 @@ function passwordCheck(): void {
 
         setCookie("myPageCheck", true + "", 5);
 
-        const pupup = document.querySelector("#popup") as HTMLDivElement;
-        pupup.style.display = "none";
-        const container = document.querySelector(".content") as HTMLDivElement;
-        container.style.display = "flex"
+        const pwCheck = document.querySelector(".PWCheck") as HTMLDivElement;
+        pwCheck.style.display = "none";
+        const container = document.querySelector(".infoForm") as HTMLDivElement;
+        container.style.display = "block"
     }
 
 }
@@ -184,5 +184,4 @@ function changeNickname(): void {
         alert("수정이 완료되었습니다.");
     }
 }
-
 

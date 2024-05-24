@@ -7,64 +7,49 @@
     /* display: none; */
 }
 
-#popup {
+ul,
+li {
+    list-style: none;
+}
+
+
+.PWCheck {
+    margin-top: 20px;
+}
+
+#passwordCheckform>div:nth-child(1) {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    height: 50px;
+}
+
+#passwordCheckform>div:nth-child(2) {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 243px);
-
+    justify-content: end;
 }
 
-#popup>div {
-    width: 30%;
-    height: 250px;
-    background-color: #EFE3C8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    position: relative;
-}
-
-#popup>div>label::before,
-#popup>div>label::after {
-    content: '';
-    width: 20px;
-    border: 2px solid gray;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    transform: rotate(45deg);
-    border-radius: 10px;
-}
-
-
-#popup>div>label::before {
-    transform: rotate(-45deg);
-}
-
-
-#passwordCheckform {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-#passwordCheckform>div {
-    display: flex;
-    justify-content: center;
+#passwordCheckform label {
+    background-color: #faf9f4;
+    display: inline-block;
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    width: 70px;
+    font-size: 14px;
 }
 
 #passwordCheckform input {
-    width: 60%;
+    width: 70%;
     height: 20px;
     padding: 3px 6px;
     margin: 10px 0;
-    border-radius: 6px;
+    outline: none;
+    border: 1px solid;
 
 }
 
 #passwordCheckform button {
+    max-width: 100px;
     width: 65%;
     height: 30px;
     background-color: #3A3125;
@@ -73,9 +58,6 @@
     font-size: 100%;
 }
 
-.is-active {
-    display: flex;
-}
 
 
 #container {
@@ -108,66 +90,125 @@
 
 
 .content {
-    width: 100%;
+    content: 1200px;
     min-height: calc(100vh - 243px);
     display: flex;
-    flex-direction: column;
+    margin-top: 60px;
     justify-content: center;
-    align-items: center;
-
+    align-items: start;
 }
 
 .content>div {
-    width: 500px;
-    padding: 20px;
-    border: 1px solid;
-    border-radius: 6px;
+    display: flex;
+    width: 1200px;
+    justify-content: space-around;
 }
 
-.content h2 {
-    text-align: center;
+.myNav {
+    padding: 25px;
+    width: 200px;
+    background-color: #EFE3C8;
 }
+
+.myNav h3 {
+    height: 50px;
+    border-bottom: 4px solid;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: rgb(95, 78, 53);
+}
+
+.myNav>div>h4 {
+    border-bottom: 1px solid rgb(219, 208, 183);
+    color: rgb(95, 78, 53);
+}
+
+.myNav ul {
+    margin-top: 10px;
+}
+
+.myNav ul>li {
+    padding: 5px 5px;
+    font-size: 14px;
+    color: rgb(150, 124, 86);
+}
+
+.myInfo {
+    width: 100%;
+    padding: 20px;
+}
+
+.myInfo>div:nth-child(1) {
+    border-bottom: 4px solid;
+}
+
+.myInfo h2 {
+    height: 54px;
+    font-size: 24px;
+    color: rgb(142, 105, 55)
+}
+
 
 #form {
-    padding: 10px;
-}
-
-#form>div {
-    margin: 30px;
-}
-
-#form>div>div {
-    display: flex;
-    justify-content: center;
-    margin: 10px;
+    margin-top: 30px;
 }
 
 
-#form>div>div>input {
-    width: 100%;
-    height: 20px;
-    border-radius: 6px;
-    border: 1px solid;
-    padding: 3px 6px;
+
+
+#form label {
+    background-color: #faf9f4;
+    display: inline-block;
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    width: 70px;
     font-size: 14px;
+}
+
+#idForm {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    height: 50px;
+}
+
+#idForm>input {
+    width: 70%;
+    height: 20px;
+    padding: 3px 6px;
+}
+
+#nicknameForm {
+    border-bottom: 1px solid;
+}
+
+#nicknameForm>input {
+    width: 70%;
+    height: 20px;
 }
 
 #loginId {
     background-color: rgb(227, 227, 227);
+    margin-top: 10px;
+    padding: 3px 6px;
+}
+
+#nickname {
+    margin-top: 10px;
+    padding: 3px 6px;
+    outline: none;
+    border: 1px solid gray;
 }
 
 #form>div:nth-child(3) {
+    margin-top: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
 }
 
-#form label {
-    display: inline-block;
-    width: 100%;
-
-}
 
 #form>div>button {
+    max-width: 100px;
     width: 45%;
     height: 30px;
     border-radius: 6px;
@@ -176,6 +217,7 @@
     font-size: 14px;
     border: none;
     outline: none;
+    margin: 0 5px;
 }
 
 
@@ -205,4 +247,10 @@
     border-top: 1px solid #e3dec9;
     margin: 10px 0;
     padding: 10px 0;
+}
+
+.is-active {
+    background-color: rgb(208, 192, 158);
+    display: flex;
+    justify-content: space-between;
 }
