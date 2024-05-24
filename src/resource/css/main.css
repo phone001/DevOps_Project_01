@@ -754,3 +754,156 @@ body {
     height: 4px;
     background: #3e2b2c;
 }
+
+
+
+
+
+/* 메인 화면 */
+.main-visual-wrap {
+    position: relative;
+    overflow: hidden;
+    height: 770px;
+}
+
+
+
+
+/* 슬라이드 */
+
+.slides {
+    height: 650px;
+    position: absolute;
+    left: 50%;
+    margin: 0 0 0 -960px;
+    width: 1920px;
+}
+
+.slides li {
+    cursor: pointer;
+    width: 100%;
+    float: left;
+    margin-right: -100%;
+    position: relative;
+    opacity: 0;
+    display: block;
+    transition: opacity 0.5s;
+}
+
+.slides li.on {
+    opacity: 1;
+}
+
+
+
+
+
+/* 슬라이드 버튼 */
+.flex-direction-nav li {
+    height: 37px;
+    top: 50%;
+    margin: -19px 0 0 0;
+    z-index: 2;
+}
+
+.flex-direction-nav .flex-nav-prev {
+    margin-top: -80px;
+    position: absolute;
+    left: 50%;
+    margin-left: -600px;
+}
+
+.slides-control a {
+    display: inline-block;
+    width: 23px;
+    height: 37px;
+    background: url(../img/main/icoSlideNav.png) no-repeat;
+    overflow: hidden;
+    line-height: 25;
+}
+
+.flex-direction-nav .flex-nav-next {
+    margin-top: -80px;
+    position: absolute;
+    right: 50%;
+    margin-right: -600px;
+}
+
+.flex-nav-next a {
+    background-position: right 0;
+}
+
+
+
+
+
+/* 빠른 예약 검색 */
+.fast-rsv-wrap {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    width: 1200px;
+    margin-left: -600px;
+    z-index: 10;
+    background: #fff;
+}
+
+.fast-rsv {
+    position: relative;
+    height: 100px;
+    margin-bottom: 0;
+    padding: 42px 0 0 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+.fast-rsv::before {
+    display: block;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 1002px;
+    height: 1px;
+    background: #eaeaea;
+}
+
+.fast-rsv-cont.ht-location {
+    width: 240px;
+}
+
+.fast-rsv-cont {
+    float: left;
+    margin-right: 0;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+
+.fast-rsv-cont ul {
+    float: left;
+}
+
+.fast-rsv-cont ul li {
+    text-align: left;
+    height: 20px;
+    margin-top: 5px;
+}
+
+.fast-rsv-cont ul li img {
+    vertical-align: middle;
+}
+
+.ht-location-wrap {
+    position: relative;
+    color: #333;
+    text-align: left;
+}
+
+.ht-sch-input {
+    width: 215px;
+    padding: 0;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
