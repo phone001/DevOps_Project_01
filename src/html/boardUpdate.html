@@ -12,7 +12,25 @@
     <script src="../js/boardManagerClass.js"></script>
 
     <script>
+        function loginCheck() {
+            const check = document.querySelector(".loginForm");
+
+            const session = sessionStorage.getItem("currentUser") === null ? null : JSON.parse(sessionStorage.getItem("currentUser"));
+            if (session !== null) {
+                const _span = document.createElement("span");
+                _span.innerHTML = "로그아웃"
+                _span.onclick = () => {
+                    sessionStorage.clear();
+                    location.reload();
+                }
+                check.innerHTML = `<a href="">${session.nickname}님</a>`
+                check.append(_span)
+            }
+
+        }
+
         window.onload = async function () {
+            loginCheck();
             window.editor = await ClassicEditor.create(document.querySelector("#content"));
             const list = new BoardManager();
             const boardIndex = new URLSearchParams(location.search).get("index");
@@ -30,7 +48,7 @@
             <div>
                 <img src="../resource/img/logo.gif">
             </div>
-            <div>
+            <div class="loginForm">
                 <a href="">로그인</a>
             </div>
         </div>
