@@ -769,6 +769,9 @@ body {
 /* #432C10 */
 .title-font {
     margin: 28px 0 20px 0;
+}
+
+.title-font>a {
     font-size: 28px;
     font-weight: bold;
     color: #432C10;
