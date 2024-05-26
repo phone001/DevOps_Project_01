@@ -14,14 +14,6 @@
     <script>
 
 
-        window.onload = async function () {
-            window.editor = await ClassicEditor.create(document.querySelector("#content"));
-            const list = new BoardManager();
-            const boardIndex = new URLSearchParams(location.search).get("index");
-            const board = list.getBoardList()[boardIndex];
-            title.value = board.getTitle();
-            editor.setData(board.getContent())
-        }
 
     </script>
 </head>
@@ -372,6 +364,24 @@
                         <button type="button" id="back">뒤로가기</button>
                     </div>
                 </form>
+                <div style="display: none;" id="imgBlock">
+                    <label class="ck ck-button ck-off ck-file-dialog-button" for="imgBtn">
+                        <svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon">
+                            <path
+                                d="M1.201 1C.538 1 0 1.47 0 2.1v14.363c0 .64.534 1.037 1.186 1.037h9.494a2.97 2.97 0 0 1-.414-.287 2.998 2.998 0 0 1-1.055-2.03 3.003 3.003 0 0 1 .693-2.185l.383-.455-.02.018-3.65-3.41a.695.695 0 0 0-.957-.034L1.5 13.6V2.5h15v5.535a2.97 2.97 0 0 1 1.412.932l.088.105V2.1c0-.63-.547-1.1-1.2-1.1H1.202Zm11.713 2.803a2.146 2.146 0 0 0-2.049 1.992 2.14 2.14 0 0 0 1.28 2.096 2.13 2.13 0 0 0 2.644-3.11 2.134 2.134 0 0 0-1.875-.978Z">
+                            </path>
+                            <path
+                                d="M15.522 19.1a.79.79 0 0 0 .79-.79v-5.373l2.059 2.455a.79.79 0 1 0 1.211-1.015l-3.352-3.995a.79.79 0 0 0-.995-.179.784.784 0 0 0-.299.221l-3.35 3.99a.79.79 0 1 0 1.21 1.017l1.936-2.306v5.185c0 .436.353.79.79.79Z">
+
+                            </path>
+                            <path
+                                d="M15.522 19.1a.79.79 0 0 0 .79-.79v-5.373l2.059 2.455a.79.79 0 1 0 1.211-1.015l-3.352-3.995a.79.79 0 0 0-.995-.179.784.784 0 0 0-.299.221l-3.35 3.99a.79.79 0 1 0 1.21 1.017l1.936-2.306v5.185c0 .436.353.79.79.79Z">
+                            </path>
+                        </svg>
+                    </label>
+
+                    <input type="file" id="imgBtn">
+                </div>
             </div>
         </div>
         <div class="footer">
@@ -409,9 +419,6 @@
 <script src="../js/boardUpdate.js"></script>
 <script>
 
-    function getEditor() {
-        return editor
-    }
     const _form = document.querySelector("#form");
 
     function submitHandler() {
@@ -431,6 +438,43 @@
         e.preventDefault();
         submitHandler()
     }
+
+    async function main() {
+        window.editor = await ClassicEditor.create(document.querySelector("#content"));
+        const list = new BoardManager();
+        const boardIndex = new URLSearchParams(location.search).get("index");
+        const board = list.getBoardList()[boardIndex];
+        title.value = board.getTitle();
+        editor.setData(board.getContent())
+        imgBtnChange();
+        appendImg(editor)
+    }
+    // 에디터기능 대체하는 이미지 버튼으로 변경하는 함수
+    async function imgBtnChange() {
+        const ckContent = document.querySelector(".ck-file-dialog-button");
+        const _btn = document.querySelector("#imgBlock > label")
+        ckContent.replaceWith(_btn)
+    }
+
+    //이미지를 에디터에 추가하는 함수 
+    function appendImg(editor) {
+        const _div = document.createElement("div");
+        const _input = document.querySelector("#imgBtn");
+        const ckContent = document.querySelector(".ck-content")
+        _input.onchange = (e) => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = async (test) => {
+                const _div = document.createElement("div");
+                const _img = document.createElement("img");
+                _img.setAttribute("src", test.target.result);
+                _div.append(_img)
+                editor.setData(ckContent.innerHTML + _div.innerHTML)
+            }
+            reader.readAsDataURL(file)
+        }
+    }
+    main();
 </script>
 <script src="../js/loginCheck.js"></script>
 
