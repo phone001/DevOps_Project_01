@@ -11,8 +11,10 @@ function storageChk() {
 
 storageChk();
 // 로그아웃
-const logoutBtn = document.querySelector("#logoutBtn") as HTMLSpanElement;
-logoutBtn.onclick = (e: Event) => {
-    sessionStorage.clear();
-    location.reload();
+if (document.querySelector("#logoutBtn") !== null) {
+    const logoutBtn = document.querySelector("#logoutBtn") as HTMLSpanElement;
+    logoutBtn.onclick = (e: Event) => {
+        sessionStorage.clear();
+        location.reload();
+    }
 }
