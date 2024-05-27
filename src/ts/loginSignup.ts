@@ -71,6 +71,70 @@ loginBtn.onclick = (e: Event) => {
     }
 }
 
+// 엔터키 입력시 로그인
+signinId.onkeydown = (e: KeyboardEvent) => {
+    if (e.key === "Enter") {
+        const _loginId: string = signinId.value;
+        const _loginPw: string = signinPw.value;
+        const userManager = new UserManager();
+        const userList: User[] = userManager.getUserList();
+        if (sessionStorage.getItem("currentUser") !== null) {
+            alert("이미 로그인 된 사용자가 있습니다. 로그아웃 후 다시 요청해 주세요.");
+            location.href = "../html/main.html";
+            return;
+        }
+        if (_loginId === "" || _loginPw === "") {
+            return alert("아이디와 비밀번호를 입력해 주세요");
+        }
+        if (userManager.getUserList().length <= 0) {
+            return alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+        }
+        for (let i = 0; i < userList.length; i++) {
+            if (userList[i].getLoginId() === _loginId && userList[i].getPassword() === _loginPw) {
+                sessionStorage.setItem("currentUser", JSON.stringify({ loginId: userList[i].getLoginId(), nickname: userList[i].getNickname() }));
+                location.href = "../html/main.html";
+                return;
+            }
+            if (i === userList.length - 1) {
+                return alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+            }
+        }
+    }
+}
+
+
+signinPw.onkeydown = (e: KeyboardEvent) => {
+    if (e.key === "Enter") {
+        const _loginId: string = signinId.value;
+        const _loginPw: string = signinPw.value;
+        const userManager = new UserManager();
+        const userList: User[] = userManager.getUserList();
+        if (sessionStorage.getItem("currentUser") !== null) {
+            alert("이미 로그인 된 사용자가 있습니다. 로그아웃 후 다시 요청해 주세요.");
+            location.href = "../html/main.html";
+            return;
+        }
+        if (_loginId === "" || _loginPw === "") {
+            return alert("아이디와 비밀번호를 입력해 주세요");
+        }
+        if (userManager.getUserList().length <= 0) {
+            return alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+        }
+        for (let i = 0; i < userList.length; i++) {
+            if (userList[i].getLoginId() === _loginId && userList[i].getPassword() === _loginPw) {
+                sessionStorage.setItem("currentUser", JSON.stringify({ loginId: userList[i].getLoginId(), nickname: userList[i].getNickname() }));
+                location.href = "../html/main.html";
+                return;
+            }
+            if (i === userList.length - 1) {
+                return alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+            }
+        }
+    }
+}
+
+
+
 
 // 회원가입 함수
 signupBtn.onclick = (e: Event) => {
@@ -113,5 +177,183 @@ signupBtn.onclick = (e: Event) => {
     alert("가입이 완료되었습니다.");
     location.reload();
 }
+
+
+// 엔터키 입력 시 회원가입
+signupId.onkeydown = (e: KeyboardEvent) => {
+    if (e.key === "Enter") {
+        const _signupId: string = signupId.value;
+        const _signupPw: string = signupPw.value;
+        const _signupPwChk: string = signupPwChk.value;
+        const _signupNickname: string = signupNickname.value;
+
+        const userManager = new UserManager();
+        const userList: User[] = userManager.getUserList();
+
+        if (_signupId === "") {
+            return alert("아이디를 입력해 주세요");
+        }
+        if (_signupPw === "") {
+            return alert("비밀번호를 입력해 주세요");
+        }
+        if (_signupPwChk === "") {
+            return alert("비밀번호가 일치하지 않습니다. 다시 입력해 주세요");
+        }
+        if (_signupNickname === "") {
+            return alert("닉네임을 입력해 주세요");
+        }
+
+        for (let user of userList) {
+            if (user.getLoginId() === _signupId) {
+                return alert("이미 존재하는 아이디입니다.");
+            }
+            if (user.getNickname() === _signupNickname) {
+                return alert("이미 존재하는 닉네임입니다.");
+            }
+        }
+
+        if (_signupPw !== _signupPwChk) {
+            return alert("비밀번호가 일치하지 않습니다. 다시 입력해 주세요");
+        }
+
+        const user = new User(_signupId, _signupPw, _signupNickname);
+        userManager.addUser(user);
+        alert("가입이 완료되었습니다.");
+        location.reload();
+    }
+}
+
+
+signupPw.onkeydown = (e: KeyboardEvent) => {
+    if (e.key === "Enter") {
+        const _signupId: string = signupId.value;
+        const _signupPw: string = signupPw.value;
+        const _signupPwChk: string = signupPwChk.value;
+        const _signupNickname: string = signupNickname.value;
+
+        const userManager = new UserManager();
+        const userList: User[] = userManager.getUserList();
+
+        if (_signupId === "") {
+            return alert("아이디를 입력해 주세요");
+        }
+        if (_signupPw === "") {
+            return alert("비밀번호를 입력해 주세요");
+        }
+        if (_signupPwChk === "") {
+            return alert("비밀번호가 일치하지 않습니다. 다시 입력해 주세요");
+        }
+        if (_signupNickname === "") {
+            return alert("닉네임을 입력해 주세요");
+        }
+
+        for (let user of userList) {
+            if (user.getLoginId() === _signupId) {
+                return alert("이미 존재하는 아이디입니다.");
+            }
+            if (user.getNickname() === _signupNickname) {
+                return alert("이미 존재하는 닉네임입니다.");
+            }
+        }
+
+        if (_signupPw !== _signupPwChk) {
+            return alert("비밀번호가 일치하지 않습니다. 다시 입력해 주세요");
+        }
+
+        const user = new User(_signupId, _signupPw, _signupNickname);
+        userManager.addUser(user);
+        alert("가입이 완료되었습니다.");
+        location.reload();
+    }
+}
+
+
+signupPwChk.onkeydown = (e: KeyboardEvent) => {
+    if (e.key === "Enter") {
+        const _signupId: string = signupId.value;
+        const _signupPw: string = signupPw.value;
+        const _signupPwChk: string = signupPwChk.value;
+        const _signupNickname: string = signupNickname.value;
+
+        const userManager = new UserManager();
+        const userList: User[] = userManager.getUserList();
+
+        if (_signupId === "") {
+            return alert("아이디를 입력해 주세요");
+        }
+        if (_signupPw === "") {
+            return alert("비밀번호를 입력해 주세요");
+        }
+        if (_signupPwChk === "") {
+            return alert("비밀번호가 일치하지 않습니다. 다시 입력해 주세요");
+        }
+        if (_signupNickname === "") {
+            return alert("닉네임을 입력해 주세요");
+        }
+
+        for (let user of userList) {
+            if (user.getLoginId() === _signupId) {
+                return alert("이미 존재하는 아이디입니다.");
+            }
+            if (user.getNickname() === _signupNickname) {
+                return alert("이미 존재하는 닉네임입니다.");
+            }
+        }
+
+        if (_signupPw !== _signupPwChk) {
+            return alert("비밀번호가 일치하지 않습니다. 다시 입력해 주세요");
+        }
+
+        const user = new User(_signupId, _signupPw, _signupNickname);
+        userManager.addUser(user);
+        alert("가입이 완료되었습니다.");
+        location.reload();
+    }
+}
+
+
+signupNickname.onkeydown = (e: KeyboardEvent) => {
+    if (e.key === "Enter") {
+        const _signupId: string = signupId.value;
+        const _signupPw: string = signupPw.value;
+        const _signupPwChk: string = signupPwChk.value;
+        const _signupNickname: string = signupNickname.value;
+
+        const userManager = new UserManager();
+        const userList: User[] = userManager.getUserList();
+
+        if (_signupId === "") {
+            return alert("아이디를 입력해 주세요");
+        }
+        if (_signupPw === "") {
+            return alert("비밀번호를 입력해 주세요");
+        }
+        if (_signupPwChk === "") {
+            return alert("비밀번호가 일치하지 않습니다. 다시 입력해 주세요");
+        }
+        if (_signupNickname === "") {
+            return alert("닉네임을 입력해 주세요");
+        }
+
+        for (let user of userList) {
+            if (user.getLoginId() === _signupId) {
+                return alert("이미 존재하는 아이디입니다.");
+            }
+            if (user.getNickname() === _signupNickname) {
+                return alert("이미 존재하는 닉네임입니다.");
+            }
+        }
+
+        if (_signupPw !== _signupPwChk) {
+            return alert("비밀번호가 일치하지 않습니다. 다시 입력해 주세요");
+        }
+
+        const user = new User(_signupId, _signupPw, _signupNickname);
+        userManager.addUser(user);
+        alert("가입이 완료되었습니다.");
+        location.reload();
+    }
+}
+
 
 
