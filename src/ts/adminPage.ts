@@ -15,6 +15,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
 
 function userMain() {
     const _checkbox = document.querySelector("#allCheckBox") as HTMLInputElement;
+    adminAuth()
     userRender();
     allCheckTest();
 }
@@ -45,6 +46,7 @@ function getListItem(list: User[]): HTMLDivElement {
     const _div = document.createElement("div") as HTMLDivElement;
     _div.classList.add("list-item");
     for (let i = 0; i < list.length; i++) {
+        //if (list[i].getLoginId() === 'admin') continue;
         const _ul = document.createElement("ul") as HTMLUListElement;
         const _liNo = document.createElement("li") as HTMLLIElement;
         const _liLoginId = document.createElement("li") as HTMLLIElement;
@@ -120,3 +122,20 @@ function allCheckTest(): void {
         }
     }
 }
+
+function adminAuth() {
+    const sessionObj = sessionStorage.getItem("currentUser") === null ? null : JSON.parse(sessionStorage.getItem("currentUser"));
+    if (sessionObj === null || sessionObj.loginId === null || sessionObj.loginId === undefined) {
+        alert("계정 정보가 없습니다.")
+        location.href = "loginSignup.html";
+    } else if (sessionObj.loginId !== 'admin') {
+        alert("관리 권한이 없습니다.");
+        history.back();
+    }
+
+}
+
+const mypage = document.querySelector("#mypage") as HTMLLIElement;
+mypage.onclick = () => location.href = "myPage.html";
+const admin = document.querySelector("#adminPage") as HTMLLIElement;
+admin.onclick = () => location.href = "adminPage.html";

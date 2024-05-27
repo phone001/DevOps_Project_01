@@ -42,6 +42,7 @@ window.onload = () => {
 
     changeNickname();
     main();
+    adminView();
     const _backBtn = document.querySelector("#backBtn") as HTMLButtonElement;
     _backBtn.onclick = () => history.back();
 }
@@ -187,6 +188,10 @@ _inputNicname.onkeyup = (e) => {
     }
 }
 
+const _admin = document.querySelector("#adminPage") as HTMLLIElement;
+_admin.onclick = () => location.href = "adminPage.html"
+
+
 
 // 예약 확인 버튼 제어
 const resrveBtn = document.querySelector(".resrve-btn") as HTMLAnchorElement;
@@ -204,6 +209,14 @@ resrveBtn.onclick = (e: Event) => {
     }
 }
 
+
+function adminView() {
+    const adminView = document.querySelector(".adminView") as HTMLDivElement;
+    const sessionObj = sessionStorage.getItem("currentUser") === null ? null : JSON.parse(sessionStorage.getItem("currentUser"));
+    if (sessionObj !== null && sessionObj.loginId !== null && sessionObj.loginId !== undefined && sessionObj.loginId === 'admin')
+        adminView.style.display = "block"
+
+}
 
 // 호텔찾기 버튼 제어
 const findHotelBtn = document.querySelector(".hotel-find-btn") as HTMLAnchorElement;

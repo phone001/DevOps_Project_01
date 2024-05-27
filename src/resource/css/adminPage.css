@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    font-size: 12px;
 }
 
 a {
@@ -763,17 +762,22 @@ body {
 }
 
 .content {
-    width: 100%;
     display: flex;
-    margin-top: 50px;
     justify-content: center;
+    margin-top: 60px;
     min-height: calc(100vh - 243px);
+}
+
+.content>div {
+    display: flex;
+    width: 1200px;
+    justify-content: space-around;
 }
 
 .myNav {
     padding: 25px;
-    width: 200px;
-    height: 100%;
+    width: 240px;
+    height: 258px;
     background-color: #EFE3C8;
     margin-right: 20px;
 }
@@ -784,7 +788,14 @@ body {
     font-size: 24px;
     margin-bottom: 20px;
     color: rgb(95, 78, 53);
+    width: 211px;
 }
+
+.myNav>div {
+    margin: 10px 0;
+    width: 211px;
+}
+
 
 .myNav>div>h4 {
     border-bottom: 1px solid rgb(219, 208, 183);
@@ -801,14 +812,14 @@ body {
     color: rgb(150, 124, 86);
 }
 
+.myNav ul>li:hover {
+    cursor: pointer;
+    background-color: rgb(208, 192, 158);
+}
 
 .myInfo {
     padding: 20px;
-}
-
-.myInfo>div:nth-child(1) {
-
-    border-bottom: 4px solid;
+    width: 1000px;
 }
 
 .myInfo h2 {
@@ -840,9 +851,6 @@ body {
 
 }
 
-#userUpdateForm {
-    width: 750px;
-}
 
 .list-title {
     height: 38px;
