@@ -85,7 +85,7 @@ function commentInsert() {
     }
     const sessionObj = JSON.parse(sessionStorage.getItem("currentUser"));
     if (sessionObj === null) {
-        alert("로그인 정보가 없습니다.");
+        alert("로그인 후 이용해주세요.");
         return;
     }
     if (!checkEmpty(comment.value)) {
@@ -289,7 +289,7 @@ function addComment(commentIndex: number, value: string): void {
     const sessionObj = sesstionCheck() ? null : JSON.parse(sessionStorage.getItem("currentUser"));
     const name = sessionObj === null ? null : sessionObj.nickname
     if (name === null) {
-        alert("로그인 정보가 없습니다.")
+        alert("로그인 후 이용해주세요.")
         return;
     }
     const reply = new Reply(value, sessionObj.nickname, boardIndex, commentIndex);
