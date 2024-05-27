@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    font-size: 12px;
 }
 
 a {
@@ -817,7 +816,6 @@ body {
 
 
 .content {
-    content: 1200px;
     min-height: calc(100vh - 243px);
     display: flex;
     margin-top: 60px;
@@ -833,8 +831,10 @@ body {
 
 .myNav {
     padding: 25px;
-    width: 200px;
+    width: 240px;
+    height: 258px;
     background-color: #EFE3C8;
+    margin-right: 20px;
 }
 
 .myNav h3 {
@@ -843,6 +843,12 @@ body {
     font-size: 24px;
     margin-bottom: 20px;
     color: rgb(95, 78, 53);
+    width: 211px;
+}
+
+.myNav>div {
+    margin: 10px 0;
+    width: 211px;
 }
 
 .myNav>div>h4 {
@@ -858,6 +864,11 @@ body {
     padding: 5px 5px;
     font-size: 14px;
     color: rgb(150, 124, 86);
+}
+
+.myNav ul>li:hover {
+    cursor: pointer;
+    background-color: rgb(208, 192, 158);
 }
 
 .myInfo {
@@ -879,9 +890,6 @@ body {
 #form {
     margin-top: 30px;
 }
-
-
-
 
 #form label {
     background-color: #faf9f4;

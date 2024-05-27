@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>문의하기</title>
     <link rel="stylesheet" href="../resource/css/boardWrite.css">
     <!-- <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script> -->
     <script src="../resource/lib/ckeditor5/build/ckeditor.js"></script>
@@ -355,6 +355,24 @@
                         <button>문의하기</button>
                     </div>
                 </form>
+                <div style="display: none;" id="imgBlock">
+                    <label class="ck ck-button ck-off ck-file-dialog-button" for="imgBtn">
+                        <svg class="ck ck-icon ck-reset_all-excluded ck-icon_inherit-color ck-button__icon">
+                            <path
+                                d="M1.201 1C.538 1 0 1.47 0 2.1v14.363c0 .64.534 1.037 1.186 1.037h9.494a2.97 2.97 0 0 1-.414-.287 2.998 2.998 0 0 1-1.055-2.03 3.003 3.003 0 0 1 .693-2.185l.383-.455-.02.018-3.65-3.41a.695.695 0 0 0-.957-.034L1.5 13.6V2.5h15v5.535a2.97 2.97 0 0 1 1.412.932l.088.105V2.1c0-.63-.547-1.1-1.2-1.1H1.202Zm11.713 2.803a2.146 2.146 0 0 0-2.049 1.992 2.14 2.14 0 0 0 1.28 2.096 2.13 2.13 0 0 0 2.644-3.11 2.134 2.134 0 0 0-1.875-.978Z">
+                            </path>
+                            <path
+                                d="M15.522 19.1a.79.79 0 0 0 .79-.79v-5.373l2.059 2.455a.79.79 0 1 0 1.211-1.015l-3.352-3.995a.79.79 0 0 0-.995-.179.784.784 0 0 0-.299.221l-3.35 3.99a.79.79 0 1 0 1.21 1.017l1.936-2.306v5.185c0 .436.353.79.79.79Z">
+
+                            </path>
+                            <path
+                                d="M15.522 19.1a.79.79 0 0 0 .79-.79v-5.373l2.059 2.455a.79.79 0 1 0 1.211-1.015l-3.352-3.995a.79.79 0 0 0-.995-.179.784.784 0 0 0-.299.221l-3.35 3.99a.79.79 0 1 0 1.21 1.017l1.936-2.306v5.185c0 .436.353.79.79.79Z">
+                            </path>
+                        </svg>
+                    </label>
+
+                    <input type="file" id="imgBtn" accept=".gif,.jpg,.png">
+                </div>
             </div>
 
         </div>
@@ -392,28 +410,16 @@
 <script src="../js/boardClass.js"></script>
 <script src="../js/boardManagerClass.js"></script>
 <!-- <script src="../js/boardWrite.js"></script> -->
+<script src="../js/loginCheck.js"></script>
 <script>
 
     let editor = null;
     const _form = document.querySelector("#form");
-    function loginCheck() {
-        const check = document.querySelector(".loginForm");
 
-        const session = sessionStorage.getItem("currentUser") === null ? null : JSON.parse(sessionStorage.getItem("currentUser"));
-        if (session !== null) {
-            const _span = document.createElement("span");
-            _span.innerHTML = "로그아웃"
-            _span.onclick = () => {
-                sessionStorage.clear();
-                location.reload();
-            }
-            check.innerHTML = `<a href="">${session.nickname}님</a>`
-            check.append(_span)
-        }
-    }
     async function main() {
-        //loginCheck();
         editor = await ClassicEditor.create(document.querySelector("#content"));
+        await imgBtnChange();
+        appendImg(editor);
     }
 
     main();
@@ -421,6 +427,11 @@
         e.preventDefault();
         const _title = document.querySelector("#title").value;
         const manager = new BoardManager();
+
+        if (!nullStringCheck(_title, "제목") || !nullStringCheck(editor.getData(), "내용"))
+            return;
+
+
         const session = sessionStorage.getItem("currentUser") === null ? null : JSON.parse(sessionStorage.getItem("currentUser"));
         if (session !== null) {
             const board = new Board(_title, session.nickname, editor.getData(), manager.getBoardList().length);
@@ -433,6 +444,38 @@
         }
     }
 
+    // 에디터기능 대체하는 이미지 버튼으로 변경하는 함수
+    async function imgBtnChange() {
+        const ckContent = document.querySelector(".ck-file-dialog-button");
+        const _btn = document.querySelector("#imgBlock > label")
+        ckContent.replaceWith(_btn)
+    }
+
+    //이미지를 에디터에 추가하는 함수 
+    function appendImg(editor) {
+        const _div = document.createElement("div");
+        const _input = document.querySelector("#imgBtn");
+        const ckContent = document.querySelector(".ck-content")
+        _input.onchange = (e) => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = async (test) => {
+                const _div = document.createElement("div");
+                const _img = document.createElement("img");
+                _img.setAttribute("src", test.target.result);
+                _div.append(_img)
+                editor.setData(ckContent.innerHTML + _div.innerHTML)
+            }
+            reader.readAsDataURL(file)
+        }
+    }
+    function nullStringCheck(el, type) {
+        if (el === '') {
+            alert(`${type}을 입력해주세요.`);
+            return false;
+        }
+        return true;
+    }
 </script>
 <script src="../js/loginCheck.js"></script>
 <script src="../js/header.js"></script>

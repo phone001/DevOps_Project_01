@@ -13,7 +13,7 @@
     <script src="../js/commentsManagerClass.js"></script>
     <script src="../js/commentsClass.js"></script>
     <script src="../js/commentsReplyClass.js"></script>
-    <script src="../js/myPage.js"></script>
+
     <script>
 
     </script>
@@ -343,10 +343,18 @@
             <div>
                 <div class="myNav">
                     <h3>마이페이지</h3>
+                    <div class="adminView" style="display: none;">
+                        <h4>관리자</h4>
+                        <ul>
+                            <li id="adminPage">
+                                <span>회원가입 승인</span>
+                            </li>
+                        </ul>
+                    </div>
                     <div>
                         <h4>내 정보</h4>
                         <ul>
-                            <li class="is-active">
+                            <li id="mypage" class="is-active">
                                 <span>프로필 수정</span>
                                 <span>></span>
                             </li>
@@ -441,5 +449,6 @@
 
 <script src="../js/loginCheck.js"></script>
 <script src="../js/header.js"></script>
+<script src="../js/myPage.js"></script>
 
 </html>
