@@ -140,6 +140,11 @@ function changeNickname(): void {
 
         const list: User[] = manager.getUserList()
 
+        if (nickname.value === '') {
+            alert("닉네임이 입력되지 않았습니다.");
+            return;
+        }
+
         //닉네임 중복체크
         let isExist = false;
         for (let item of list) {
@@ -164,6 +169,21 @@ function changeNickname(): void {
         sessionStorage.setItem("currentUser", JSON.stringify(updateSesstion));
         changeBoardNicnname(oldName, nickname.value)
         alert("수정이 완료되었습니다.");
+    }
+}
+
+const _inputNicname = document.querySelector("#nickname") as HTMLInputElement;
+_inputNicname.onkeyup = (e) => {
+    const _target = e.target as HTMLInputElement;
+    const _nicknameForm = document.querySelector("#nicknameForm") as HTMLDivElement;
+    const _p = document.createElement("div") as HTMLDivElement;
+    if (_target.value === '' && (_nicknameForm.querySelector("div") === null || _nicknameForm.querySelector("div") === undefined)) {
+        _p.innerHTML = "닉네임을 입력해주세요";
+        _p.style.color = "red";
+        _p.style.fontSize = "14px"
+        _nicknameForm.append(_p)
+    } else if (_target.value !== '' && (_nicknameForm.querySelector("div") !== null && _nicknameForm.querySelector("div") !== undefined)) {
+        (_nicknameForm.querySelector("div") as HTMLDivElement).remove();
     }
 }
 

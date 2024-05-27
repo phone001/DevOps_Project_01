@@ -427,6 +427,11 @@
         e.preventDefault();
         const _title = document.querySelector("#title").value;
         const manager = new BoardManager();
+
+        if (!nullStringCheck(_title, "제목") || !nullStringCheck(editor.getData(), "내용"))
+            return;
+
+
         const session = sessionStorage.getItem("currentUser") === null ? null : JSON.parse(sessionStorage.getItem("currentUser"));
         if (session !== null) {
             const board = new Board(_title, session.nickname, editor.getData(), manager.getBoardList().length);
@@ -464,7 +469,13 @@
             reader.readAsDataURL(file)
         }
     }
-
+    function nullStringCheck(el, type) {
+        if (el === '') {
+            alert(`${type}을 입력해주세요.`);
+            return false;
+        }
+        return true;
+    }
 </script>
 
 

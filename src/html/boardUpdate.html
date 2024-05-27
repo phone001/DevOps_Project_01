@@ -427,7 +427,8 @@
 
         const title = document.querySelector("#title").value;
         const content = editor.getData();
-
+        if (!nullStringCheck(title, "제목") || !nullStringCheck(editor.getData(), "내용"))
+            return;
 
         const boardList = new BoardManager();
         boardList.updateBoard(boardIndex, title, content);
@@ -474,6 +475,14 @@
             reader.readAsDataURL(file)
         }
     }
+    function nullStringCheck(el, type) {
+        if (el === '') {
+            alert(`${type}을 입력해주세요.`);
+            return false;
+        }
+        return true;
+    }
+
     main();
 </script>
 <script src="../js/loginCheck.js"></script>
