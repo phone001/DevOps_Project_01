@@ -955,3 +955,37 @@ body {
     display: flex;
     justify-content: space-between;
 }
+
+.circleCheck {
+    width: 15px;
+    height: 15px;
+    border: 1px solid;
+    border-radius: 50%;
+}
+
+.is-checked {
+    background-color: rgb(240, 235, 216);
+    position: relative;
+}
+
+.is-checked::after,
+.is-checked::before {
+    content: '';
+    width: 5px;
+    border: 1px solid;
+    border-radius: 15px;
+    position: absolute;
+    top: 7px;
+    left: 2px;
+    transform: rotate(50deg);
+}
+
+.is-checked::before {
+    top: 8px;
+}
+
+.is-checked::after {
+    transform: rotate(-60deg);
+    width: 7px;
+    left: 5px;
+}
