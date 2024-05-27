@@ -18,18 +18,21 @@ function updateBoard() {
 function deleteBoard() {
     if (!confirm("삭제하시겠습니까?")) return;
     const boardindex: number = parseInt(new URLSearchParams(location.search).get("index"));
+    console.log(boardindex)
     const manager: BoardManager = new BoardManager();
     const commnetsManager: CommentsManager = new CommentsManager("commentsList", "replyList");
     const commnetsList: Comments[] = commnetsManager.getCommentsList();
     const replyList: Reply[] = commnetsManager.getReplyList();
     for (let i = commnetsList.length - 1; i >= 0; i--) {
         if (commnetsList[i].getBoardIndex() === boardindex) {
+            console.log("삭제됨")
             commnetsList.splice(i, 1);
         }
     }
     for (let i = 0; i < commnetsList.length; i++) {
         if (commnetsList[i].getBoardIndex() > boardindex) {
             commnetsList[i].setBoardIndex(commnetsList[i].getBoardIndex() - 1);
+            console.log(commnetsList[i].getBoardIndex())
         }
     }
 
@@ -44,12 +47,13 @@ function deleteBoard() {
         }
     }
 
-
     for (let i = 0; i < manager.getBoardList().length; i++) {
         if (manager.getBoardList()[i].getIndex() > boardindex) {
             manager.getBoardList()[i].setIndex(manager.getBoardList()[i].getIndex() - 1);
         }
     }
+    commnetsManager.setCommentsList();
+    commnetsManager.setReplyList();
     manager.getBoardList().splice(boardindex, 1);
     manager.setBoardList();
     location.href = "boardList.html"
