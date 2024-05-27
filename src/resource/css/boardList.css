@@ -27,6 +27,7 @@ body {
 
 /* 헤더 */
 #head {
+    font-size: 12px;
     width: 100%;
     height: 90px;
     background-color: #EFE3C8;
