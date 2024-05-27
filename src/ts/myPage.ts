@@ -42,6 +42,7 @@ window.onload = () => {
 
     changeNickname();
     main();
+    adminView();
     const _backBtn = document.querySelector("#backBtn") as HTMLButtonElement;
     _backBtn.onclick = () => history.back();
 }
@@ -187,8 +188,17 @@ _inputNicname.onkeyup = (e) => {
     }
 }
 
+function adminView() {
+    const adminView = document.querySelector(".adminView") as HTMLDivElement;
+    const sessionObj = sessionStorage.getItem("currentUser") === null ? null : JSON.parse(sessionStorage.getItem("currentUser"));
+    if (sessionObj !== null && sessionObj.loginId !== null && sessionObj.loginId !== undefined && sessionObj.loginId === 'admin')
+        adminView.style.display = "block"
+
+}
 const _admin = document.querySelector("#adminPage") as HTMLLIElement;
 _admin.onclick = () => location.href = "adminPage.html"
+const _mypage = document.querySelector("#mypage") as HTMLLIElement;
+_mypage.onclick = () => location.href = "myPage.html"
 
 
 
