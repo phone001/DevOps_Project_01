@@ -170,6 +170,7 @@ function changeNickname(): void {
         sessionStorage.setItem("currentUser", JSON.stringify(updateSesstion));
         changeBoardNicnname(oldName, nickname.value)
         alert("수정이 완료되었습니다.");
+        location.reload();
     }
 }
 
