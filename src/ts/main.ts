@@ -6,6 +6,25 @@ let index: number = 1;
 let isActive: boolean = false;
 
 
+// 관리자 아이디 생성
+const admin1 = new User("admin", "1234", "관리자", true);
+const userManager = new UserManager();
+const userList = userManager.getUserList();
+if (userList.length === 0) {
+  userManager.addUser(admin1);
+} else {
+  let adminChk: number = 0;
+  for (let i = 0; i < userList.length; i++) {
+    if (userList[i].getLoginId() === admin1.getLoginId()) {
+      adminChk++
+    }
+  }
+  if (adminChk === 0) {
+    userManager.addUser(admin1);
+  }
+}
+
+
 // 슬라이드 자동 동작 시간
 let interval = setInterval(() => {
   if (isActive) return;

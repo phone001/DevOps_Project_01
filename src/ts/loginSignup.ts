@@ -59,7 +59,12 @@ loginBtn.onclick = (e: Event) => {
     if (userManager.getUserList().length <= 0) {
         return alert("아이디 또는 비밀번호가 일치하지 않습니다.");
     }
+
     for (let i = 0; i < userList.length; i++) {
+        if (userList[i].getLoginId() === _loginId && userList[i].getAuth() === false) {
+            alert("승인되지 않은 사용자입니다.")
+            return;
+        }
         if (userList[i].getLoginId() === _loginId && userList[i].getPassword() === _loginPw) {
             sessionStorage.setItem("currentUser", JSON.stringify({ loginId: userList[i].getLoginId(), nickname: userList[i].getNickname() }));
             location.href = "../html/main.html";
