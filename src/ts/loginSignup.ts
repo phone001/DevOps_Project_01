@@ -95,6 +95,10 @@ signinId.onkeydown = (e: KeyboardEvent) => {
             return alert("아이디 또는 비밀번호가 일치하지 않습니다.");
         }
         for (let i = 0; i < userList.length; i++) {
+            if (userList[i].getLoginId() === _loginId && userList[i].getAuth() === false) {
+                alert("승인되지 않은 사용자입니다.")
+                return;
+            }
             if (userList[i].getLoginId() === _loginId && userList[i].getPassword() === _loginPw) {
                 sessionStorage.setItem("currentUser", JSON.stringify({ loginId: userList[i].getLoginId(), nickname: userList[i].getNickname() }));
                 location.href = "../html/main.html";
@@ -126,6 +130,10 @@ signinPw.onkeydown = (e: KeyboardEvent) => {
             return alert("아이디 또는 비밀번호가 일치하지 않습니다.");
         }
         for (let i = 0; i < userList.length; i++) {
+            if (userList[i].getLoginId() === _loginId && userList[i].getAuth() === false) {
+                alert("승인되지 않은 사용자입니다.")
+                return;
+            }
             if (userList[i].getLoginId() === _loginId && userList[i].getPassword() === _loginPw) {
                 sessionStorage.setItem("currentUser", JSON.stringify({ loginId: userList[i].getLoginId(), nickname: userList[i].getNickname() }));
                 location.href = "../html/main.html";
@@ -162,6 +170,9 @@ signupBtn.onclick = (e: Event) => {
     }
     if (_signupNickname === "") {
         return alert("닉네임을 입력해 주세요");
+    }
+    if (_signupId === "admin") {
+        return alert("이미 존재하는 아이디입니다.")
     }
 
     for (let user of userList) {
@@ -207,6 +218,9 @@ signupId.onkeydown = (e: KeyboardEvent) => {
         if (_signupNickname === "") {
             return alert("닉네임을 입력해 주세요");
         }
+        if (_signupId === "admin") {
+            return alert("이미 존재하는 아이디입니다.")
+        }
 
         for (let user of userList) {
             if (user.getLoginId() === _signupId) {
@@ -250,6 +264,9 @@ signupPw.onkeydown = (e: KeyboardEvent) => {
         }
         if (_signupNickname === "") {
             return alert("닉네임을 입력해 주세요");
+        }
+        if (_signupId === "admin") {
+            return alert("이미 존재하는 아이디입니다.")
         }
 
         for (let user of userList) {
@@ -295,6 +312,9 @@ signupPwChk.onkeydown = (e: KeyboardEvent) => {
         if (_signupNickname === "") {
             return alert("닉네임을 입력해 주세요");
         }
+        if (_signupId === "admin") {
+            return alert("이미 존재하는 아이디입니다.")
+        }
 
         for (let user of userList) {
             if (user.getLoginId() === _signupId) {
@@ -338,6 +358,9 @@ signupNickname.onkeydown = (e: KeyboardEvent) => {
         }
         if (_signupNickname === "") {
             return alert("닉네임을 입력해 주세요");
+        }
+        if (_signupId === "admin") {
+            return alert("이미 존재하는 아이디입니다.")
         }
 
         for (let user of userList) {
