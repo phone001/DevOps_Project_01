@@ -1,0 +1,53 @@
+# 1차 프로젝트
+## 목차
+- [개요](##개요)
+- [주요 기능](##주요기능)
+- [팀 내 역할](##팀-내-역할)
+- [이슈사항](##이슈사항)
+
+## 개요
+ 기간 : 기간 2024.05.14 ~ 2024.05.28 <br>
+
+ 개발 인원 : 2명 <br>
+
+ 기술스택<br>
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"> 
+<img src="https://img.shields.io/badge/HTML-D0654C?style=for-the-badge&logo=HTML5&logoColor=white"> 
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black"> 
+<img src="https://img.shields.io/badge/Typescript-3D6AAC?style=for-the-badge&logo=Typescript&logoColor=white"> 
+
+목표   
+프론트 영역에서 모던한 느낌의 화면 구성 및 게시판, 로그인 기능 구현
+
+## 주요기능
+- 메인 페이지
+   - 게시판 및 로그인 페이지 이동
+   - 팝업을 사용한 호텔 찾기 및 예약 화면
+
+- 로그인 및 회원가입
+   - 사용자 정보로 가입 및 로그인
+   - 가입한 사용자 중복 확인
+   
+- 마이페이지 및 관리자 페이지
+   - 현재 인증한 사용자의 정보 확인 및 수정
+   - 관리자 인증시 사용자 가입허가 
+- 게시판
+   - 작성된 게시글 조회
+   - 게시글 작성, 수정, 삭제
+
+## 팀 내 역할
+1. 게시판 
+ - 화면 구성
+ - 사용자 인증 확인 글 게시 기능 구현
+ - 작성자 인증 확인 후 수정,삭제 기능 구현 
+
+2. 마이페이지 및 관리 페이지
+ - 화면 구성
+ - 재인증 후 마이페이지 사용자 정보 표시 및 정보변경 기능 구현
+ - 관리자 계정 인증 후 사용자 가입허가 기능 구현
+
+## 이슈사항
+> 1. 게시글 및 대댓글 삭제시 이전 글의 댓글, 대댓글로 이동    
+> => 삭제시 각 게시글, 댓글, 대댓글의 index 수정   
+> 2. 닉네임 변경시 게시글 수정, 삭제 권한 없음   
+> => 삭제시 각 게시글, 댓글, 대댓글의 index 수정
