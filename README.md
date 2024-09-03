@@ -21,17 +21,22 @@
 
 ## 주요기능
 - 메인 페이지
+![1차 메인](https://github.com/user-attachments/assets/a0c9e987-b8c4-40fc-9e8d-e4db6a478711)
    - 게시판 및 로그인 페이지 이동
    - 팝업을 사용한 호텔 찾기 및 예약 화면
 
 - 로그인 및 회원가입
+![1차 로그인](https://github.com/user-attachments/assets/b8bcc89d-947f-429f-b664-ebad2a13afbd)
    - 사용자 정보로 가입 및 로그인
    - 가입한 사용자 중복 확인
-   
+
 - 마이페이지 및 관리자 페이지
+![1차 마이페이지](https://github.com/user-attachments/assets/e24d2ec3-8950-4793-bb32-23edb4084572)
    - 현재 인증한 사용자의 정보 확인 및 수정
    - 관리자 인증시 사용자 가입허가 
+
 - 게시판
+  ![1차 게시판](https://github.com/user-attachments/assets/5a08363f-12ef-45ce-9317-afed8e223641)
    - 작성된 게시글 조회
    - 게시글 작성, 수정, 삭제
 
