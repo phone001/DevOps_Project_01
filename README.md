@@ -9,6 +9,8 @@
  기간 : 2024.05.14 ~ 2024.05.28 <br>
 
  개발 인원 : 2명 <br>
+ - 팀원 1 : 로그인, 회원가입, 게시판 목록 화면 및 기능 구현
+ - 팀원 2 : 게시판 및 댓글 추가, 조회, 수정, 삭제 및 마이페이지 기능 구현
 
  기술스택<br>
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"> 
